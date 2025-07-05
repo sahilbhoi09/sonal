@@ -1,24 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hello, Sonal Kahar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sonal Kahar</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div id="floating-icons"></div>
+
   <div class="container">
-    <h1>Hello, <span class="name">Sonal Kahar</span></h1>
+    <h1><span class="name">Sonal Kahar</span></h1>
 
     <div class="buttons">
       <button class="main-btn" onclick="goToNextPage()">Start Journey</button>
-      <button onclick="throwFlowers()">💐 Throw Flowers</button>
-      <button onclick="addSparkles()">✨ Sparkle</button>
+      <button onclick="throwFlowers()">🌸 Throw Flowers</button>
+      <button onclick="toggleSparkle()">🌌 Sparkle</button>
       <button onclick="launchFireworks()">🎆 Fireworks</button>
     </div>
 
-    <div id="effects"></div>
+    <div id="flower-garden"></div>
+    <canvas id="fireworks-canvas"></canvas>
   </div>
 
   <script src="script.js"></script>
