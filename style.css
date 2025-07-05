@@ -1,118 +1,133 @@
-/* Mobile-first design */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #ffd6e8, #ffe8f0, #fff5fa);
-  background-size: 400% 400%;
-  animation: gradientFlow 15s ease infinite;
+  background: linear-gradient(45deg, #ffe0ec, #ffe5f0, #ffd6e8);
   overflow-x: hidden;
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-@keyframes gradientFlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  transition: background 1s ease;
+  position: relative;
 }
 
 .container {
   text-align: center;
   padding: 20px;
-  max-width: 500px;
-}
-
-h1 {
-  font-size: 2rem;
-  color: #ff4081;
-  text-shadow: 1px 1px 10px rgba(255, 64, 129, 0.4);
-  margin-bottom: 20px;
-  animation: fadeIn 1.2s ease-out;
+  position: relative;
+  z-index: 2;
 }
 
 .name {
   font-family: 'Great Vibes', cursive;
-  font-size: 2.5rem;
-  display: block;
-  color: #c2185b;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+  font-size: 3rem;
+  color: #ff4081;
+  text-shadow: 2px 2px 8px rgba(255, 64, 129, 0.4);
 }
 
 .buttons {
+  margin-top: 25px;
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
   justify-content: center;
-  margin-top: 20px;
 }
 
 button {
-  padding: 10px 16px;
+  padding: 12px 18px;
   font-size: 1rem;
   border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  background: #fff;
+  border-radius: 14px;
+  background: white;
   color: #444;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease;
 }
 
 button:hover {
   transform: scale(1.05);
-  background: #ffe4f0;
+  background: #ffe8f0;
 }
 
 .main-btn {
-  font-size: 1.2rem;
   background: #ff4081;
   color: white;
   font-weight: bold;
+  font-size: 1.2rem;
   border: 2px solid white;
 }
 
-/* Effects */
-#effects {
+/* Floating icons */
+#floating-icons {
   position: fixed;
   top: 0;
   left: 0;
+  width: 200vw;
+  height: 200vh;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    repeating-linear-gradient(transparent, transparent 40px, white 40px, white 41px),
+    repeating-linear-gradient(90deg, transparent, transparent 40px, white 40px, white 41px);
+  overflow: hidden;
+}
+
+.floating-item {
+  position: absolute;
+  font-size: 1.3rem;
+  opacity: 0.3;
+  border: 1px solid white;
+  border-radius: 50%;
+  padding: 4px;
+  animation: floatRight 30s linear infinite;
+}
+
+@keyframes floatRight {
+  from { transform: translateX(-100vw); }
+  to { transform: translateX(100vw); }
+}
+
+/* Flower garden */
+#flower-garden {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  z-index: 3;
+}
+
+/* Sparkle mode */
+body.sparkle-mode {
+  background: radial-gradient(ellipse at bottom, #000 0%, #111 100%);
+  color: white;
+}
+
+.star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 2s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+
+/* Fireworks canvas */
+#fireworks-canvas {
+  position: fixed;
+  top: 0; left: 0;
   width: 100vw;
   height: 100vh;
+  z-index: 5;
   pointer-events: none;
-  z-index: 999;
-}
-
-.effect {
-  position: absolute;
-  pointer-events: none;
-  z-index: 1000;
-}
-
-/* Animations */
-@keyframes drop {
-  0% {
-    transform: translateY(-10vh) rotate(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(100vh) rotate(360deg);
-    opacity: 0;
-  }
-}
-
-@keyframes sparkleFade {
-  0% { opacity: 1; transform: scale(1); }
-  100% { opacity: 0; transform: scale(1.5); }
-}
-
-@keyframes explode {
-  0% { transform: scale(0); opacity: 1; }
-  100% { transform: scale(3); opacity: 0; }
 }
