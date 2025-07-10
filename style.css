@@ -17,6 +17,7 @@ body.sparkle-mode {
   background: linear-gradient(to bottom, #0a0a2a, #1a1a3a, #2a2a4a), url('https://via.placeholder.com/1920x1080.png?text=Milky+Way+Background');
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   color: white;
 }
 
@@ -219,7 +220,16 @@ button:hover {
   .buttons { gap: 8px; }
   .floating-item { font-size: 1rem; }
   .falling-flower { font-size: 1.2rem; }
-  .night-moon { width: 100px; height: 100px; }
+  .night-moon {
+    width: 100px;
+    height: 100px;
+    top: 5vh;
+    left: 5vw;
+  }
+  body.sparkle-mode {
+    background-size: cover;
+    background-position: center;
+  }
   .moving-star { width: 1px; height: 1px; }
   .shooting-star { width: 1px; height: 1px; }
   .comet { width: 2px; height: 2px; }
