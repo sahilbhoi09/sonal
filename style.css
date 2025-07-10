@@ -13,6 +13,12 @@ body {
   position: relative;
 }
 
+/* Sparkle Mode */
+body.sparkle-mode {
+  background: radial-gradient(ellipse at bottom, #000 0%, #111 100%);
+  color: white;
+}
+
 .container {
   text-align: center;
   padding: 20px;
@@ -65,29 +71,25 @@ button:hover {
   position: fixed;
   top: 0;
   left: 0;
-  width: 200vw;
-  height: 200vh;
+  width: 100vw;
+  height: 100vh;
   z-index: 0;
   pointer-events: none;
-  background-image:
-    repeating-linear-gradient(transparent, transparent 40px, white 40px, white 41px),
-    repeating-linear-gradient(90deg, transparent, transparent 40px, white 40px, white 41px);
-  overflow: hidden;
 }
 
 .floating-item {
   position: absolute;
   font-size: 1.3rem;
-  opacity: 0.3;
   border: 1px solid white;
   border-radius: 50%;
   padding: 4px;
-  animation: floatRight 30s linear infinite;
+  opacity: 0.6;
+  animation: floatRight linear infinite;
 }
 
 @keyframes floatRight {
-  from { transform: translateX(-100vw); }
-  to { transform: translateX(100vw); }
+  0% { transform: translateX(-10vw); }
+  100% { transform: translateX(110vw); }
 }
 
 /* Flower garden */
@@ -102,16 +104,11 @@ button:hover {
   z-index: 3;
 }
 
-/* Sparkle mode */
-body.sparkle-mode {
-  background: radial-gradient(ellipse at bottom, #000 0%, #111 100%);
-  color: white;
-}
-
+/* Stars */
 .star {
   position: absolute;
-  width: 3px;
-  height: 3px;
+  width: 2px;
+  height: 2px;
   background: white;
   border-radius: 50%;
   animation: twinkle 2s infinite ease-in-out;
@@ -122,12 +119,53 @@ body.sparkle-mode {
   50% { opacity: 1; }
 }
 
-/* Fireworks canvas */
-#fireworks-canvas {
+#stars-container {
   position: fixed;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 5;
   pointer-events: none;
+  z-index: 1;
+}
+
+/* Firework animation */
+#firework-launcher {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 150px;
+  width: 20px;
+  z-index: 10;
+}
+
+.rocket {
+  width: 12px;
+  height: 30px;
+  background: linear-gradient(to top, red, orange, yellow);
+  border-radius: 4px;
+  margin: auto;
+  animation: none;
+}
+
+.rocket.launch {
+  animation: launch 1s ease-in forwards, explode 0.3s ease-out 1s forwards;
+}
+
+@keyframes launch {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-400px); opacity: 1; }
+}
+
+@keyframes explode {
+  0% {
+    box-shadow: 0 0 0 rgba(255, 255, 0, 0.8);
+    background: yellow;
+  }
+  100% {
+    box-shadow: 0 0 60px 20px rgba(255, 255, 255, 0.9);
+    background: transparent;
+    opacity: 0;
+  }
 }
