@@ -13,7 +13,6 @@ body {
   position: relative;
 }
 
-/* Sparkle Mode */
 body.sparkle-mode {
   background: radial-gradient(ellipse at bottom, #000 0%, #111 100%);
   color: white;
@@ -79,7 +78,7 @@ button:hover {
 
 .floating-item {
   position: absolute;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   border: 1px solid white;
   border-radius: 50%;
   padding: 4px;
@@ -92,7 +91,22 @@ button:hover {
   100% { transform: translateX(110vw); }
 }
 
-/* Flower garden */
+/* Flower shower */
+.falling-flower {
+  position: fixed;
+  top: -50px;
+  font-size: 1.5rem;
+  animation: flowerFall 4s linear forwards;
+  pointer-events: none;
+  z-index: 5;
+}
+
+@keyframes flowerFall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(360deg); opacity: 0.9; }
+}
+
+/* Garden bottom */
 #flower-garden {
   position: fixed;
   bottom: 0;
@@ -105,18 +119,23 @@ button:hover {
 }
 
 /* Stars */
-.star {
+.falling-star {
   position: absolute;
   width: 2px;
   height: 2px;
   background: white;
   border-radius: 50%;
-  animation: twinkle 2s infinite ease-in-out;
+  animation: starTwinkle 2s infinite ease-in-out, starFall 12s linear forwards;
 }
 
-@keyframes twinkle {
+@keyframes starTwinkle {
   0%, 100% { opacity: 0.2; }
   50% { opacity: 1; }
+}
+
+@keyframes starFall {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(100vh); opacity: 0.1; }
 }
 
 #stars-container {
@@ -129,43 +148,13 @@ button:hover {
   z-index: 1;
 }
 
-/* Firework animation */
-#firework-launcher {
+/* Fireworks */
+#fireworks-canvas {
   position: fixed;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  height: 150px;
-  width: 20px;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   z-index: 10;
-}
-
-.rocket {
-  width: 12px;
-  height: 30px;
-  background: linear-gradient(to top, red, orange, yellow);
-  border-radius: 4px;
-  margin: auto;
-  animation: none;
-}
-
-.rocket.launch {
-  animation: launch 1s ease-in forwards, explode 0.3s ease-out 1s forwards;
-}
-
-@keyframes launch {
-  0% { transform: translateY(0); opacity: 1; }
-  100% { transform: translateY(-400px); opacity: 1; }
-}
-
-@keyframes explode {
-  0% {
-    box-shadow: 0 0 0 rgba(255, 255, 0, 0.8);
-    background: yellow;
-  }
-  100% {
-    box-shadow: 0 0 60px 20px rgba(255, 255, 255, 0.9);
-    background: transparent;
-    opacity: 0;
-  }
+  pointer-events: none;
 }
