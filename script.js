@@ -16,23 +16,31 @@ for (let i = 0; i < 80; i++) {
   document.getElementById('floating-icons').appendChild(el);
 }
 
-// Flower rain from top
+// Flower rain from top with variety
 function throwFlowers() {
+  const flowerTypes = ['🌸', '🌹', '🌺', '🌷', '🍃']; // Cherry blossom, rose, hibiscus, tulip, petal
+  const garden = document.getElementById("flower-garden");
+  garden.innerHTML = ''; // Clear garden to prevent accumulation
+
   for (let i = 0; i < 50; i++) {
     const flower = document.createElement("div");
+    const type = flowerTypes[Math.floor(Math.random() * flowerTypes.length)];
     flower.className = "falling-flower";
-    flower.innerText = "🌸";
+    flower.innerText = type;
     flower.style.left = Math.random() * 100 + "vw";
     flower.style.fontSize = 1 + Math.random() * 1.5 + "rem";
+    if (type === '🍃') flower.className += " falling-petal"; // Special class for petals
     document.body.appendChild(flower);
 
+    // Remove flower after animation
     setTimeout(() => {
       flower.remove();
-      const garden = document.getElementById("flower-garden");
-      const planted = document.createElement("div");
-      planted.innerText = "🌸";
-      planted.style.margin = "2px";
-      garden.appendChild(planted);
+      if (type !== '🍃') { // Only add to garden if not a petal
+        const planted = document.createElement("div");
+        planted.innerText = type;
+        planted.style.margin = "2px";
+        garden.appendChild(planted);
+      }
     }, 5000);
   }
 }
@@ -44,7 +52,7 @@ function toggleSparkle() {
   if (!body.classList.contains("sparkle-mode")) {
     body.classList.add("sparkle-mode");
     // Stars with movement
-    for (let i = 0; i < 200; i++) { // Increased number of stars
+    for (let i = 0; i < 200; i++) {
       const star = document.createElement("div");
       star.className = "moving-star";
       star.style.top = Math.random() * 100 + "vh";
