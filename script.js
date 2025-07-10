@@ -3,7 +3,7 @@ function goToNextPage() {
 }
 
 // Floating icons
-const icons = ['🎸', '🥟'];
+const icons = ['🎸', '🥟', '🐝'];
 for (let i = 0; i < 80; i++) {
   const el = document.createElement('div');
   el.classList.add('floating-item');
