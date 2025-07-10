@@ -1,32 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello, Sonal Kahar</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Cosmic Garden</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    #color-buttons, #firework-show, #color-picker {
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    #color-picker select {
+      padding: 8px;
+      font-size: 1rem;
+      border-radius: 14px;
+      border: none;
+      background: white;
+      color: #444;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    #color-picker select:hover {
+      background: #ffe8f0;
+    }
+    @media (max-width: 768px) {
+      #color-buttons button, #firework-show button {
+        font-size: 0.8rem;
+        padding: 8px 12px;
+      }
+      #color-picker select {
+        font-size: 0.9rem;
+        padding: 6px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <!-- Floating emojis with rotation -->
-  <div id="floating-icons"></div>
-
-  <!-- Main content -->
   <div class="container">
-    <h1>Hello, <span class="name">Sonal Kahar</span></h1>
-
+    <h1 class="name">Cosmic Garden</h1>
     <div class="buttons">
-      <button class="main-btn" onclick="goToNextPage()">Start Journey</button>
-      <button onclick="throwFlowers()">🌸 Throw Flowers</button>
-      <button onclick="toggleSparkle()">🌌 Sparkle</button>
-      <button onclick="startFirework()">🎆 Fireworks</button>
+      <button class="main-btn" onclick="goToNextPage()">Next Page</button>
+      <button onclick="throwFlowers()">Rain Flowers</button>
+      <button onclick="toggleSparkle()">Sparkle</button>
+      <button onclick="startFirework()">Launch Firework</button>
     </div>
-
-    <div id="flower-garden"></div>
-    <div id="stars-container"></div>
-    <canvas id="fireworks-canvas"></canvas>
+    <div id="color-buttons"></div>
+    <div id="firework-show"></div>
+    <div id="color-picker"></div>
   </div>
-
+  <div id="floating-icons"></div>
+  <div id="flower-garden"></div>
+  <div id="stars-container"></div>
+  <canvas id="fireworks-canvas"></canvas>
   <script src="script.js"></script>
 </body>
 </html>
