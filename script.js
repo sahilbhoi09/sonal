@@ -1,32 +1,9 @@
-// Performance optimization - requestAnimationFrame for all animations
-const optimizedRAF = window.requestAnimationFrame || 
-                    window.webkitRequestAnimationFrame || 
-                    window.mozRequestAnimationFrame ||
-                    window.msRequestAnimationFrame ||
-                    function(callback) { return setTimeout(callback, 1000/60); };
-
-// Error handling wrapper
-function safeExecute(fn) {
-  return function(...args) {
-    try {
-      return fn.apply(this, args);
-    } catch (error) {
-      console.error('Error in Cosmic Garden:', error);
-      return null;
-    }
-  };
-}
-
-// Original functions with optimizations
 function goToNextPage() {
   window.location.href = "next.html";
 }
 
-// Floating icons with performance optimization
-const floatingIconsContainer = document.getElementById('floating-icons');
+// Floating icons with rotation
 const icons = ['🎸', '🥟', '🌸'];
-const floatingItems = [];
-
 for (let i = 0; i < 80; i++) {
   const el = document.createElement('div');
   el.classList.add('floating-item');
@@ -36,17 +13,14 @@ for (let i = 0; i < 80; i++) {
   el.style.fontSize = 1 + Math.random() * 1.2 + 'rem';
   el.style.animationDuration = 20 + Math.random() * 20 + 's';
   if (el.innerText === '🌸') el.style.animation = 'rotate 4s linear infinite';
-  floatingIconsContainer.appendChild(el);
-  floatingItems.push(el);
+  document.getElementById('floating-icons').appendChild(el);
 }
 
-// Optimized flower rain
-const flowerTypes = ['🌸', '🌹', '🌺', '🌷', '🍃'];
-const garden = document.getElementById("flower-garden");
-
-const throwFlowers = safeExecute(function() {
+// Flower rain with variety and proper removal
+function throwFlowers() {
+  const flowerTypes = ['🌸', '🌹', '🌺', '🌷', '🍃'];
+  const garden = document.getElementById("flower-garden");
   garden.innerHTML = '';
-  const flowers = [];
 
   for (let i = 0; i < 50; i++) {
     const flower = document.createElement("div");
@@ -67,22 +41,15 @@ const throwFlowers = safeExecute(function() {
         garden.appendChild(planted);
       }
     }, { once: true });
-    
-    flowers.push(flower);
   }
-  return flowers;
-});
+}
 
-// Sparkle mode with optimizations
-const toggleSparkle = safeExecute(function() {
+// Sparkle mode with night background, stars, moon, shooting stars, comets, and constellations
+function toggleSparkle() {
   const body = document.body;
   const container = document.getElementById("stars-container");
-  
   if (!body.classList.contains("sparkle-mode")) {
     body.classList.add("sparkle-mode");
-    
-    // Create stars
-    const stars = [];
     for (let i = 0; i < 200; i++) {
       const star = document.createElement("div");
       star.className = "moving-star";
@@ -90,37 +57,27 @@ const toggleSparkle = safeExecute(function() {
       star.style.left = Math.random() * 100 + "vw";
       star.style.animationDuration = 30 + Math.random() * 30 + 's';
       container.appendChild(star);
-      stars.push(star);
     }
-    
-    // Create moon
     const moon = document.createElement("div");
     moon.className = "night-moon";
     moon.style.top = "10vh";
     moon.style.left = "10vw";
     container.appendChild(moon);
-    
-    // Create shooting star
     const shootingStar = document.createElement("div");
     shootingStar.className = "shooting-star";
     shootingStar.style.top = Math.random() * 50 + "vh";
     shootingStar.style.left = "90vw";
     shootingStar.style.animationDuration = "5s";
     container.appendChild(shootingStar);
-    
-    // Create comet
     const comet = document.createElement("div");
     comet.className = "comet";
     comet.style.top = Math.random() * 30 + "vh";
     comet.style.left = "80vw";
     comet.style.animationDuration = "8s";
     container.appendChild(comet);
-    
-    // Create constellations
-    const constellations = [];
-    const constellation1 = document.createElement("div");
-    constellation1.className = "constellation";
-    constellation1.innerHTML = `
+    const constellation = document.createElement("div");
+    constellation.className = "constellation";
+    constellation.innerHTML = `
       <div class="constellation-star" style="top: 20vh; left: 20vw;"></div>
       <div class="constellation-star" style="top: 25vh; left: 25vw;"></div>
       <div class="constellation-star" style="top: 30vh; left: 30vw;"></div>
@@ -129,9 +86,7 @@ const toggleSparkle = safeExecute(function() {
       <div class="constellation-star" style="top: 45vh; left: 45vw;"></div>
       <div class="constellation-star" style="top: 50vh; left: 50vw;"></div>
     `;
-    container.appendChild(constellation1);
-    constellations.push(constellation1);
-    
+    container.appendChild(constellation);
     const constellation2 = document.createElement("div");
     constellation2.className = "constellation";
     constellation2.innerHTML = `
@@ -142,24 +97,19 @@ const toggleSparkle = safeExecute(function() {
       <div class="constellation-star" style="top: 75vh; left: 35vw;"></div>
     `;
     container.appendChild(constellation2);
-    constellations.push(constellation2);
-    
-    return { stars, moon, shootingStar, comet, constellations };
   } else {
     body.classList.remove("sparkle-mode");
     container.innerHTML = '';
-    return null;
   }
-});
+}
 
-// Fireworks with performance optimizations
+// Firework from bottom to top burst
 const canvas = document.getElementById("fireworks-canvas");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let fireworks = [];
-let fireworkColor = 'white';
 
 function startFirework() {
   const x = Math.random() * canvas.width;
@@ -184,7 +134,7 @@ function startFirework() {
       ctx.arc(firework.x, firework.y, 5, 0, Math.PI * 2);
       ctx.fillStyle = 'white';
       ctx.fill();
-      optimizedRAF(launch);
+      requestAnimationFrame(launch);
     } else {
       for (let i = 0; i < 100; i++) {
         fireworks.push({
@@ -215,26 +165,21 @@ function animateFireworks() {
     ctx.fill();
     if (p.life <= 0) fireworks.splice(index, 1);
   });
-  optimizedRAF(animateFireworks);
+  requestAnimationFrame(animateFireworks);
 }
 animateFireworks();
 
-// Handle resize with debounce
-let resizeTimeout;
+// Handle resize for mobile compatibility
 window.addEventListener('resize', () => {
-  clearTimeout(resizeTimeout);
-  resizeTimeout = setTimeout(() => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }, 200);
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 });
 
-// Click handlers with optimizations
+// New Feature 1: Click to Spawn Elements
 document.addEventListener('click', (e) => {
   const container = document.getElementById('stars-container');
   const rand = Math.random();
-  
-  if (rand < 0.7) {
+  if (rand < 0.7) { // 70% chance for flower
     const flower = document.createElement('div');
     const flowerTypes = ['🌸', '🌹', '🌺', '🌷', '🍃'];
     flower.className = 'falling-flower';
@@ -245,7 +190,7 @@ document.addEventListener('click', (e) => {
     if (flower.innerText === '🍃') flower.className += ' falling-petal';
     container.appendChild(flower);
     flower.addEventListener('animationend', () => flower.remove(), { once: true });
-  } else if (rand < 0.9) {
+  } else if (rand < 0.9) { // 20% chance for shooting star
     const shootingStar = document.createElement('div');
     shootingStar.className = 'shooting-star';
     shootingStar.style.left = (e.clientX / window.innerWidth * 100) + 'vw';
@@ -253,7 +198,7 @@ document.addEventListener('click', (e) => {
     shootingStar.style.animationDuration = '5s';
     container.appendChild(shootingStar);
     shootingStar.addEventListener('animationend', () => shootingStar.remove(), { once: true });
-  } else {
+  } else { // 10% chance for comet
     const comet = document.createElement('div');
     comet.className = 'comet';
     comet.style.left = (e.clientX / window.innerWidth * 100) + 'vw';
@@ -264,7 +209,7 @@ document.addEventListener('click', (e) => {
   }
 }, { passive: true });
 
-// Sky color functions
+// New Feature 4: Customizable Sky Colors
 function setSkyColor(gradient) {
   document.body.classList.add('sparkle-mode');
   document.body.style.background = gradient + ', url(\'https://via.placeholder.com/1920x1080.png?text=Milky+Way+Background\')';
@@ -272,6 +217,17 @@ function setSkyColor(gradient) {
   document.body.style.backgroundPosition = 'center';
   document.body.style.backgroundRepeat = 'no-repeat';
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('color-buttons').innerHTML = `
+    <button onclick="setSkyColor('linear-gradient(to bottom, #0a0a2a, #1a1a3a, #2a2a4a)')">Dark Blue</button>
+    <button onclick="setSkyColor('linear-gradient(to bottom, #2a0033, #4b0062, #6b008b)')">Purple</button>
+    <button onclick="setSkyColor('linear-gradient(to bottom, #000000, #1a1a1a, #333333)')">Black</button>
+  `;
+});
+
+// New Feature 10: Interactive Fireworks
+let fireworkColor = 'white';
 
 function updateFireworkColor(color) {
   fireworkColor = color;
@@ -299,7 +255,7 @@ function launchCustomFirework(e) {
       ctx.arc(firework.x, firework.y, 5, 0, Math.PI * 2);
       ctx.fillStyle = 'white';
       ctx.fill();
-      optimizedRAF(launch);
+      requestAnimationFrame(launch);
     } else {
       for (let i = 0; i < 100; i++) {
         fireworks.push({
@@ -317,6 +273,10 @@ function launchCustomFirework(e) {
   launch();
 }
 
+document.addEventListener('click', (e) => {
+  launchCustomFirework(e);
+}, { capture: true, passive: true });
+
 function fireworkShow() {
   const intervals = [1000, 1500, 2000];
   intervals.forEach((interval, index) => {
@@ -327,16 +287,8 @@ function fireworkShow() {
   });
 }
 
-// Initialize UI components
 document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('color-buttons').innerHTML = `
-    <button onclick="setSkyColor('linear-gradient(to bottom, #0a0a2a, #1a1a3a, #2a2a4a)')">Dark Blue</button>
-    <button onclick="setSkyColor('linear-gradient(to bottom, #2a0033, #4b0062, #6b008b)')">Purple</button>
-    <button onclick="setSkyColor('linear-gradient(to bottom, #000000, #1a1a1a, #333333)')">Black</button>
-  `;
-  
   document.getElementById('firework-show').innerHTML = '<button onclick="fireworkShow()">Firework Show</button>';
-  
   document.getElementById('color-picker').innerHTML = `
     <select onchange="updateFireworkColor(this.value)">
       <option value="red">Red</option>
@@ -349,11 +301,5 @@ document.addEventListener('DOMContentLoaded', () => {
   `;
 });
 
-// Performance monitoring
-window.addEventListener('load', () => {
-  console.log('Cosmic Garden fully loaded');
-  if ('performance' in window) {
-    const timing = performance.getEntriesByType('navigation')[0];
-    console.log(`Load time: ${timing.loadEventEnd - timing.startTime}ms`);
-  }
-});
+// Prevent default click behavior if needed
+window.addEventListener('click', (e) => e.stopPropagation(), { capture: true, passive: true });
