@@ -1,10 +1,3 @@
-/* style.css - Optimized */
-:root {
-  --primary-color: #ff4081;
-  --secondary-color: #ffffff;
-  --accent-color: #ffe0ec;
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -13,72 +6,287 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(45deg, var(--accent-color), #ffd6e8, #ffccd7);
+  background: linear-gradient(45deg, #ffe0ec, #ffd6e8, #ffccd7);
   overflow-x: hidden;
   min-height: 100vh;
   transition: background 1s ease;
   position: relative;
 }
 
-/* Hero Section */
-.hero-section {
+body.sparkle-mode {
+  background: linear-gradient(to bottom, #0a0a2a, #1a1a3a, #2a2a4a), url('https://via.placeholder.com/1920x1080.png?text=Milky+Way+Background');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+}
+
+.container {
+  text-align: center;
+  padding: 20px;
   position: relative;
-  z-index: 10;
+  z-index: 2;
 }
 
-.name-title {
-  animation: fadeIn 1.5s ease-out;
+.name {
+  font-family: 'Great Vibes', cursive;
+  font-size: 3rem;
+  color: #ff4081;
+  text-shadow: 2px 2px 8px rgba(255, 64, 129, 0.4);
 }
 
-.action-buttons {
+.buttons {
+  margin-top: 25px;
   display: flex;
-  gap: 1rem;
   flex-wrap: wrap;
+  gap: 12px;
   justify-content: center;
-  margin-top: 1.5rem;
 }
 
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+button {
+  padding: 12px 18px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 14px;
+  background: white;
+  color: #444;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease;
 }
 
-/* Floating Elements */
+button:hover {
+  transform: scale(1.05);
+  background: #ffe8f0;
+}
+
+.main-btn {
+  background: #ff4081;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  border: 2px solid white;
+}
+
+/* Floating icons with movement and rotation */
 #floating-icons {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
   pointer-events: none;
-  z-index: 1;
 }
 
 .floating-item {
   position: absolute;
+  font-size: 1.5rem;
+  border: 1px solid white;
+  border-radius: 50%;
+  padding: 4px;
+  opacity: 0.6;
+  animation: floatRight linear infinite;
   will-change: transform;
-  animation: float 15s linear infinite;
 }
 
-@keyframes float {
-  0% { transform: translateY(0) translateX(0) rotate(0deg); }
-  100% { transform: translateY(-100vh) translateX(50vw) rotate(360deg); }
+@keyframes floatRight {
+  0% { transform: translateX(-10vw) rotate(0deg); }
+  100% { transform: translateX(110vw) rotate(360deg); }
 }
 
-/* Responsive Design */
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Flower rain from top */
+.falling-flower {
+  position: fixed;
+  top: -50px;
+  font-size: 1.5rem;
+  animation: flowerFall 5s linear forwards;
+  pointer-events: none;
+  z-index: 5;
+  will-change: transform, opacity;
+}
+
+.falling-petal {
+  animation: petalFall 6s linear forwards;
+}
+
+@keyframes flowerFall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+
+@keyframes petalFall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(120vh) rotate(720deg); opacity: 0; }
+}
+
+/* Garden bottom */
+#flower-garden {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  z-index: 3;
+}
+
+/* Moving Stars */
+.moving-star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 5px #fff;
+  animation: starMove 30s linear infinite;
+  will-change: transform;
+}
+
+@keyframes starMove {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(10vw, -10vh); }
+  100% { transform: translate(20vw, 0); }
+}
+
+/* Night Moon */
+.night-moon {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: url('https://via.placeholder.com/200x200.png?text=Crescent+Moon');
+  background-size: cover;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+/* Shooting Star */
+.shooting-star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #fff, transparent);
+  box-shadow: 0 0 10px #fff;
+  animation: shoot 5s linear infinite;
+  z-index: 2;
+  will-change: transform, opacity;
+}
+
+@keyframes shoot {
+  0% { transform: translate(100vw, 50vh) scale(1); opacity: 1; }
+  100% { transform: translate(-100vw, -50vh) scale(0); opacity: 0; }
+}
+
+/* Comet */
+.comet {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: linear-gradient(to right, transparent, #87CEEB, transparent);
+  box-shadow: 0 0 15px #87CEEB;
+  animation: cometMove 8s linear infinite;
+  z-index: 2;
+  will-change: transform, opacity;
+}
+
+@keyframes cometMove {
+  0% { transform: translate(90vw, 30vh) scale(1); opacity: 1; }
+  100% { transform: translate(-90vw, 70vh) scale(0); opacity: 0; }
+}
+
+/* Constellation */
+.constellation {
+  position: absolute;
+  z-index: 2;
+}
+
+.constellation-star {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #fff;
+  z-index: 2;
+}
+
+/* Fireworks */
+#fireworks-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Mobile adjustments */
 @media (max-width: 768px) {
-  .name-title {
-    font-size: 3rem;
+  .name { font-size: 2rem; }
+  button { font-size: 0.9rem; padding: 10px 15px; }
+  .buttons { gap: 8px; }
+  .floating-item { font-size: 1rem; }
+  .falling-flower { font-size: 1.2rem; }
+  .night-moon {
+    width: 100px;
+    height: 100px;
+    top: 5vh;
+    left: 5vw;
+  }
+  body.sparkle-mode {
+    background-size: cover;
+    background-position: center;
+  }
+  .moving-star { width: 1px; height: 1px; }
+  .shooting-star { width: 1px; height: 1px; }
+  .comet { width: 2px; height: 2px; }
+  .constellation-star { width: 3px; height: 3px; }
+  .falling-petal { font-size: 1rem; }
+}
+
+/* NEW: Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* NEW: Accessibility focus styles */
+button:focus, select:focus {
+  outline: 2px solid #ff4081;
+  outline-offset: 2px;
+}
+
+/* NEW: Print styles */
+@media print {
+  #floating-icons, #flower-garden, #stars-container, #fireworks-canvas,
+  .buttons, #color-buttons, #firework-show, #color-picker {
+    display: none !important;
   }
   
-  .cta-button {
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
+  body {
+    background: white !important;
+    color: black !important;
+    padding: 1cm;
   }
   
-  .action-buttons {
-    flex-direction: column;
-    gap: 0.8rem;
+  .container {
+    text-align: center;
+  }
+  
+  .name {
+    color: black !important;
+    text-shadow: none !important;
+    margin-bottom: 1cm;
   }
 }
