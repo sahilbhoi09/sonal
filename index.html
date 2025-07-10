@@ -1,27 +1,37 @@
 <!DOCTYPE html>
-<html lang="="en">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sonal Kahar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hello, Sonal Kahar</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- Floating emojis background -->
   <div id="floating-icons"></div>
 
+  <!-- Main container -->
   <div class="container">
-    <h1><span class="name">Sonal Kahar</span></h1>
+    <h1>Hello, <span class="name">Sonal Kahar</span></h1>
 
     <div class="buttons">
       <button class="main-btn" onclick="goToNextPage()">Start Journey</button>
       <button onclick="throwFlowers()">🌸 Throw Flowers</button>
       <button onclick="toggleSparkle()">🌌 Sparkle</button>
-      <button onclick="launchFireworks()">🎆 Fireworks</button>
+      <button onclick="startFirework()">🎆 Fireworks</button>
     </div>
 
+    <!-- Flower garden -->
     <div id="flower-garden"></div>
-    <canvas id="fireworks-canvas"></canvas>
+
+    <!-- Sparkle stars -->
+    <div id="stars-container"></div>
+
+    <!-- Firework -->
+    <div id="firework-launcher">
+      <div class="rocket" id="rocket"></div>
+    </div>
   </div>
 
   <script src="script.js"></script>
