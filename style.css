@@ -6,7 +6,7 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(45deg, #ffe0ec, #ffe5f0, #ffd6e8);
+  background: linear-gradient(45deg, #ffe0ec, #ffd6e8, #ffccd7);
   overflow-x: hidden;
   min-height: 100vh;
   transition: background 1s ease;
@@ -65,7 +65,7 @@ button:hover {
   border: 2px solid white;
 }
 
-/* Floating icons */
+/* Floating icons with movement and rotation */
 #floating-icons {
   position: fixed;
   top: 0;
@@ -87,23 +87,28 @@ button:hover {
 }
 
 @keyframes floatRight {
-  0% { transform: translateX(-10vw); }
-  100% { transform: translateX(110vw); }
+  0% { transform: translateX(-10vw) rotate(0deg); }
+  100% { transform: translateX(110vw) rotate(360deg); }
 }
 
-/* Flower shower */
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Flower rain from top */
 .falling-flower {
   position: fixed;
   top: -50px;
   font-size: 1.5rem;
-  animation: flowerFall 4s linear forwards;
+  animation: flowerFall 5s linear forwards;
   pointer-events: none;
   z-index: 5;
 }
 
 @keyframes flowerFall {
   0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-  100% { transform: translateY(100vh) rotate(360deg); opacity: 0.9; }
+  100% { transform: translateY(110vh) rotate(360deg); opacity: 0.9; }
 }
 
 /* Garden bottom */
@@ -157,4 +162,13 @@ button:hover {
   height: 100vh;
   z-index: 10;
   pointer-events: none;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .name { font-size: 2rem; }
+  button { font-size: 0.9rem; padding: 10px 15px; }
+  .buttons { gap: 8px; }
+  .floating-item { font-size: 1rem; }
+  .falling-flower { font-size: 1.2rem; }
 }
