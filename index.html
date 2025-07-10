@@ -3,58 +3,74 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interactive Cosmic Garden</title>
+  <meta name="description" content="Sonal Kahar's Interactive Cosmic Garden">
+  <title>Sonal Kahar - Cosmic Garden</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
-    #color-buttons, #firework-show, #color-picker {
-      margin-top: 15px;
+    /* Additional inline styles for critical elements */
+    .hero-section {
+      min-height: 100vh;
       display: flex;
+      flex-direction: column;
       justify-content: center;
-      gap: 10px;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
     }
-    #color-picker select {
-      padding: 8px;
-      font-size: 1rem;
-      border-radius: 14px;
+    
+    .name-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 4rem;
+      color: #ff4081;
+      margin-bottom: 2rem;
+      text-shadow: 2px 2px 8px rgba(255, 64, 129, 0.4);
+    }
+    
+    .cta-button {
+      background: #ff4081;
+      color: white;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      border-radius: 50px;
       border: none;
-      background: white;
-      color: #444;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: all 0.3s ease;
+      margin: 0.5rem;
+      box-shadow: 0 4px 15px rgba(255, 64, 129, 0.3);
     }
-    #color-picker select:hover {
-      background: #ffe8f0;
+    
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(255, 64, 129, 0.4);
     }
-    @media (max-width: 768px) {
-      #color-buttons button, #firework-show button {
-        font-size: 0.8rem;
-        padding: 8px 12px;
-      }
-      #color-picker select {
-        font-size: 0.9rem;
-        padding: 6px;
-      }
+    
+    .cta-button.secondary {
+      background: white;
+      color: #ff4081;
+      border: 2px solid #ff4081;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1 class="name">Cosmic Garden</h1>
-    <div class="buttons">
-      <button class="main-btn" onclick="goToNextPage()">Next Page</button>
-      <button onclick="throwFlowers()">Rain Flowers</button>
-      <button onclick="toggleSparkle()">Sparkle</button>
-      <button onclick="startFirework()">Launch Firework</button>
+  <div class="hero-section">
+    <h1 class="name-title">Sonal Kahar</h1>
+    <button class="cta-button" onclick="goToNextPage()">Start Journey</button>
+    <div class="action-buttons">
+      <button class="cta-button secondary" onclick="throwFlowers()">Throw Flowers</button>
+      <button class="cta-button secondary" onclick="toggleSparkle()">Sparkle</button>
+      <button class="cta-button secondary" onclick="startFirework()">Fireworks</button>
     </div>
-    <div id="color-buttons"></div>
-    <div id="firework-show"></div>
-    <div id="color-picker"></div>
   </div>
-  <div id="floating-icons"></div>
-  <div id="flower-garden"></div>
-  <div id="stars-container"></div>
-  <canvas id="fireworks-canvas"></canvas>
-  <script src="script.js"></script>
+
+  <!-- Interactive Elements -->
+  <div id="floating-icons" aria-hidden="true"></div>
+  <div id="flower-garden" aria-hidden="true"></div>
+  <div id="stars-container" aria-hidden="true"></div>
+  <canvas id="fireworks-canvas" aria-hidden="true"></canvas>
+
+  <script src="script.js" defer></script>
 </body>
 </html>
