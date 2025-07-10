@@ -87,7 +87,6 @@ button:hover {
   padding: 4px;
   opacity: 0.6;
   animation: floatRight linear infinite;
-  will-change: transform;
 }
 
 @keyframes floatRight {
@@ -108,7 +107,6 @@ button:hover {
   animation: flowerFall 5s linear forwards;
   pointer-events: none;
   z-index: 5;
-  will-change: transform, opacity;
 }
 
 .falling-petal {
@@ -146,7 +144,6 @@ button:hover {
   border-radius: 50%;
   box-shadow: 0 0 5px #fff;
   animation: starMove 30s linear infinite;
-  will-change: transform;
 }
 
 @keyframes starMove {
@@ -175,7 +172,6 @@ button:hover {
   box-shadow: 0 0 10px #fff;
   animation: shoot 5s linear infinite;
   z-index: 2;
-  will-change: transform, opacity;
 }
 
 @keyframes shoot {
@@ -192,7 +188,6 @@ button:hover {
   box-shadow: 0 0 15px #87CEEB;
   animation: cometMove 8s linear infinite;
   z-index: 2;
-  will-change: transform, opacity;
 }
 
 @keyframes cometMove {
@@ -249,44 +244,4 @@ button:hover {
   .comet { width: 2px; height: 2px; }
   .constellation-star { width: 3px; height: 3px; }
   .falling-petal { font-size: 1rem; }
-}
-
-/* NEW: Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-/* NEW: Accessibility focus styles */
-button:focus, select:focus {
-  outline: 2px solid #ff4081;
-  outline-offset: 2px;
-}
-
-/* NEW: Print styles */
-@media print {
-  #floating-icons, #flower-garden, #stars-container, #fireworks-canvas,
-  .buttons, #color-buttons, #firework-show, #color-picker {
-    display: none !important;
-  }
-  
-  body {
-    background: white !important;
-    color: black !important;
-    padding: 1cm;
-  }
-  
-  .container {
-    text-align: center;
-  }
-  
-  .name {
-    color: black !important;
-    text-shadow: none !important;
-    margin-bottom: 1cm;
-  }
-}
+} 
