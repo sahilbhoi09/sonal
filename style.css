@@ -14,7 +14,9 @@ body {
 }
 
 body.sparkle-mode {
-  background: radial-gradient(ellipse at bottom, #000 0%, #111 100%);
+  background: linear-gradient(to bottom, #0a0a2a, #1a1a3a, #2a2a4a), url('https://via.placeholder.com/1920x1080.png?text=Milky+Way+Background');
+  background-size: cover;
+  background-position: center;
   color: white;
 }
 
@@ -123,66 +125,67 @@ button:hover {
   z-index: 3;
 }
 
-/* Stars */
-.falling-star {
+/* Moving Stars */
+.moving-star {
   position: absolute;
-  width: 3px;
-  height: 3px;
+  width: 2px;
+  height: 2px;
   background: white;
   border-radius: 50%;
   box-shadow: 0 0 5px #fff;
-  animation: starTwinkle 2s infinite ease-in-out, starFall 12s linear forwards;
+  animation: starMove 30s linear infinite;
 }
 
-@keyframes starTwinkle {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 1; }
+@keyframes starMove {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(10vw, -10vh); }
+  100% { transform: translate(20vw, 0); }
 }
 
-@keyframes starFall {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(100vh); opacity: 0.1; }
-}
-
-#stars-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Night sky elements */
+/* Night Moon */
 .night-moon {
   position: absolute;
-  width: 50px;
-  height: 50px;
-  background: radial-gradient(circle, #fff 0%, #ddd 70%);
+  width: 200px;
+  height: 200px;
+  background: url('https://via.placeholder.com/200x200.png?text=Crescent+Moon');
+  background-size: cover;
   border-radius: 50%;
-  box-shadow: 0 0 20px #fff3;
-  animation: moonGlow 4s infinite alternate;
   z-index: 2;
 }
 
-@keyframes moonGlow {
-  0% { box-shadow: 0 0 10px #fff3; }
-  100% { box-shadow: 0 0 30px #fff; }
-}
-
-.night-planet {
+/* Shooting Star */
+.shooting-star {
   position: absolute;
-  font-size: 2rem;
-  animation: planetOrbit 20s linear infinite;
+  width: 2px;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #fff, transparent);
+  box-shadow: 0 0 10px #fff;
+  animation: shoot 5s linear infinite;
   z-index: 2;
 }
 
-@keyframes planetOrbit {
-  0% { transform: rotate(0deg) translateX(20px); }
-  100% { transform: rotate(360deg) translateX(20px); }
+@keyframes shoot {
+  0% { transform: translate(100vw, 50vh) scale(1); opacity: 1; }
+  100% { transform: translate(-100vw, -50vh) scale(0); opacity: 0; }
 }
 
+/* Comet */
+.comet {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: linear-gradient(to right, transparent, #87CEEB, transparent);
+  box-shadow: 0 0 15px #87CEEB;
+  animation: cometMove 8s linear infinite;
+  z-index: 2;
+}
+
+@keyframes cometMove {
+  0% { transform: translate(90vw, 30vh) scale(1); opacity: 1; }
+  100% { transform: translate(-90vw, 70vh) scale(0); opacity: 0; }
+}
+
+/* Constellation */
 .constellation {
   position: absolute;
   z-index: 2;
@@ -216,7 +219,9 @@ button:hover {
   .buttons { gap: 8px; }
   .floating-item { font-size: 1rem; }
   .falling-flower { font-size: 1.2rem; }
-  .night-moon { width: 30px; height: 30px; }
-  .night-planet { font-size: 1.5rem; }
+  .night-moon { width: 100px; height: 100px; }
+  .moving-star { width: 1px; height: 1px; }
+  .shooting-star { width: 1px; height: 1px; }
+  .comet { width: 2px; height: 2px; }
   .constellation-star { width: 3px; height: 3px; }
 }
