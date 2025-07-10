@@ -16,11 +16,11 @@ for (let i = 0; i < 80; i++) {
   document.getElementById('floating-icons').appendChild(el);
 }
 
-// Flower rain from top with variety
+// Flower rain with variety and proper removal
 function throwFlowers() {
   const flowerTypes = ['🌸', '🌹', '🌺', '🌷', '🍃']; // Cherry blossom, rose, hibiscus, tulip, petal
   const garden = document.getElementById("flower-garden");
-  garden.innerHTML = ''; // Clear garden to prevent accumulation
+  garden.innerHTML = ''; // Clear garden before new rain
 
   for (let i = 0; i < 50; i++) {
     const flower = document.createElement("div");
@@ -29,19 +29,19 @@ function throwFlowers() {
     flower.innerText = type;
     flower.style.left = Math.random() * 100 + "vw";
     flower.style.fontSize = 1 + Math.random() * 1.5 + "rem";
-    if (type === '🍃') flower.className += " falling-petal"; // Special class for petals
+    if (type === '🍃') flower.className += " falling-petal";
     document.body.appendChild(flower);
 
-    // Remove flower after animation
-    setTimeout(() => {
+    // Remove flower after animation completes
+    flower.addEventListener('animationend', () => {
       flower.remove();
-      if (type !== '🍃') { // Only add to garden if not a petal
+      if (type !== '🍃') { // Add to garden only if not a petal
         const planted = document.createElement("div");
         planted.innerText = type;
         planted.style.margin = "2px";
         garden.appendChild(planted);
       }
-    }, 5000);
+    }, { once: true });
   }
 }
 
@@ -123,7 +123,6 @@ function startFirework() {
   const y = canvas.height;
   const colors = ['red', 'orange', 'yellow', 'white', 'blue', 'cyan'];
 
-  // Launch firework
   let firework = {
     x: x,
     y: y,
@@ -144,7 +143,6 @@ function startFirework() {
       ctx.fill();
       requestAnimationFrame(launch);
     } else {
-      // Burst at top
       for (let i = 0; i < 100; i++) {
         fireworks.push({
           x: firework.x,
