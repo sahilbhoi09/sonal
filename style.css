@@ -126,15 +126,16 @@ button:hover {
 /* Stars */
 .falling-star {
   position: absolute;
-  width: 2px;
-  height: 2px;
+  width: 3px;
+  height: 3px;
   background: white;
   border-radius: 50%;
+  box-shadow: 0 0 5px #fff;
   animation: starTwinkle 2s infinite ease-in-out, starFall 12s linear forwards;
 }
 
 @keyframes starTwinkle {
-  0%, 100% { opacity: 0.2; }
+  0%, 100% { opacity: 0.3; }
   50% { opacity: 1; }
 }
 
@@ -158,14 +159,15 @@ button:hover {
   position: absolute;
   width: 50px;
   height: 50px;
-  background: #fff;
+  background: radial-gradient(circle, #fff 0%, #ddd 70%);
   border-radius: 50%;
-  box-shadow: 0 0 20px #fff;
+  box-shadow: 0 0 20px #fff3;
   animation: moonGlow 4s infinite alternate;
+  z-index: 2;
 }
 
 @keyframes moonGlow {
-  0% { box-shadow: 0 0 10px #fff; }
+  0% { box-shadow: 0 0 10px #fff3; }
   100% { box-shadow: 0 0 30px #fff; }
 }
 
@@ -173,11 +175,12 @@ button:hover {
   position: absolute;
   font-size: 2rem;
   animation: planetOrbit 20s linear infinite;
+  z-index: 2;
 }
 
 @keyframes planetOrbit {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% { transform: rotate(0deg) translateX(20px); }
+  100% { transform: rotate(360deg) translateX(20px); }
 }
 
 .constellation {
@@ -187,11 +190,12 @@ button:hover {
 
 .constellation-star {
   position: absolute;
-  width: 3px;
-  height: 3px;
+  width: 5px;
+  height: 5px;
   background: white;
   border-radius: 50%;
-  box-shadow: 0 0 5px #fff;
+  box-shadow: 0 0 10px #fff;
+  z-index: 2;
 }
 
 /* Fireworks */
@@ -214,4 +218,5 @@ button:hover {
   .falling-flower { font-size: 1.2rem; }
   .night-moon { width: 30px; height: 30px; }
   .night-planet { font-size: 1.5rem; }
+  .constellation-star { width: 3px; height: 3px; }
 }
