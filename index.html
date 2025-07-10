@@ -26,16 +26,6 @@
     #color-picker select:hover {
       background: #ffe8f0;
     }
-    @media (max-width: 768px) {
-      #color-buttons button, #firework-show button {
-        font-size: 0.8rem;
-        padding: 8px 12px;
-      }
-      #color-picker select {
-        font-size: 0.9rem;
-        padding: 6px;
-      }
-    }
   </style>
 </head>
 <body>
@@ -47,7 +37,11 @@
       <button onclick="toggleSparkle()">Sparkle</button>
       <button onclick="startFirework()">Launch Firework</button>
     </div>
-    <div id="color-buttons"></div>
+    <div id="color-buttons">
+      <button onclick="changeBackgroundColor('gradient')">Gradient</button>
+      <button onclick="changeBackgroundColor('galaxy')">Galaxy</button>
+      <button onclick="changeBackgroundColor('multicolor')">Multicolor</button>
+    </div>
     <div id="firework-show"></div>
     <div id="color-picker"></div>
   </div>
