@@ -4,16 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Interactive Cosmic Garden</title>
-  <!-- ✨ NEW: Preloaded fonts for better performance -->
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;700&display=swap" rel="stylesheet"></noscript>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
-    /* ✨ NEW: Added smooth scroll behavior */
-    html {
-      scroll-behavior: smooth;
-    }
-    
     #color-buttons, #firework-show, #color-picker {
       margin-top: 15px;
       display: flex;
@@ -33,22 +28,6 @@
     #color-picker select:hover {
       background: #ffe8f0;
     }
-    
-    /* ✨ NEW: Added focus styles for accessibility */
-    button:focus, select:focus {
-      outline: 2px solid #ff4081;
-      outline-offset: 2px;
-    }
-    
-    /* ✨ NEW: Reduced motion media query */
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-    }
-    
     @media (max-width: 768px) {
       #color-buttons button, #firework-show button {
         font-size: 0.8rem;
@@ -58,15 +37,42 @@
         font-size: 0.9rem;
         padding: 6px;
       }
-      
-      /* ✨ NEW: Better mobile button spacing */
-      .buttons {
-        gap: 8px;
-      }
+    }
+    
+    /* NEW: Loading screen */
+    #loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, #ffe0ec, #ffd6e8, #ffccd7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease;
+    }
+    
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid #ff4081;
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
   </style>
 </head>
 <body>
+  <div id="loading-screen">
+    <div class="loading-spinner"></div>
+  </div>
+  
   <div class="container">
     <h1 class="name">Cosmic Garden</h1>
     <div class="buttons">
@@ -83,20 +89,17 @@
   <div id="flower-garden"></div>
   <div id="stars-container"></div>
   <canvas id="fireworks-canvas"></canvas>
-  
-  <!-- ✨ NEW: Added loading indicator -->
-  <div id="loading" style="position:fixed;top:0;left:0;width:100%;height:100%;background:white;z-index:9999;display:flex;justify-content:center;align-items:center;">
-    <div style="font-size:2rem;color:#ff4081;">Loading Cosmic Garden...</div>
-  </div>
-  
   <script src="script.js"></script>
   
-  <!-- ✨ NEW: Added Google Analytics (optional) -->
   <script>
+    // Hide loading screen when everything is loaded
     window.addEventListener('load', function() {
-      document.getElementById('loading').style.display = 'none';
-      
-      // Your analytics code here (if needed)
+      setTimeout(function() {
+        document.getElementById('loading-screen').style.opacity = '0';
+        setTimeout(function() {
+          document.getElementById('loading-screen').style.display = 'none';
+        }, 500);
+      }, 1000);
     });
   </script>
 </body>
