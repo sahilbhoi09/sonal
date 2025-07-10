@@ -43,30 +43,31 @@ function toggleSparkle() {
   const container = document.getElementById("stars-container");
   if (!body.classList.contains("sparkle-mode")) {
     body.classList.add("sparkle-mode");
+    // Stars
     for (let i = 0; i < 100; i++) {
       const star = document.createElement("div");
       star.className = "falling-star";
-      star.style.top = Math.random() * 50 + "vh";
+      star.style.top = Math.random() * 100 + "vh";
       star.style.left = Math.random() * 100 + "vw";
       container.appendChild(star);
     }
-    // Add moon
+    // Moon
     const moon = document.createElement("div");
     moon.className = "night-moon";
     moon.style.top = "10vh";
     moon.style.left = "10vw";
     container.appendChild(moon);
-    // Add planets
+    // Planets
     const planets = ['🌍', '🌎', '🌕'];
     for (let i = 0; i < 3; i++) {
       const planet = document.createElement("div");
       planet.className = "night-planet";
       planet.innerText = planets[i];
-      planet.style.top = Math.random() * 40 + "vh";
-      planet.style.left = Math.random() * 80 + "vw";
+      planet.style.top = Math.random() * 40 + 20 + "vh";
+      planet.style.left = Math.random() * 70 + 15 + "vw";
       container.appendChild(planet);
     }
-    // Add simple constellation (e.g., Big Dipper)
+    // Constellation (e.g., Big Dipper)
     const constellation = document.createElement("div");
     constellation.className = "constellation";
     constellation.innerHTML = `
