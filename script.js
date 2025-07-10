@@ -37,18 +37,19 @@ function throwFlowers() {
   }
 }
 
-// Sparkle mode with night background, stars, moon, planets, and constellations
+// Sparkle mode with night background, stars, moon, shooting stars, comets, and constellations
 function toggleSparkle() {
   const body = document.body;
   const container = document.getElementById("stars-container");
   if (!body.classList.contains("sparkle-mode")) {
     body.classList.add("sparkle-mode");
-    // Stars
-    for (let i = 0; i < 100; i++) {
+    // Stars with movement
+    for (let i = 0; i < 200; i++) { // Increased number of stars
       const star = document.createElement("div");
-      star.className = "falling-star";
+      star.className = "moving-star";
       star.style.top = Math.random() * 100 + "vh";
       star.style.left = Math.random() * 100 + "vw";
+      star.style.animationDuration = 30 + Math.random() * 30 + "s";
       container.appendChild(star);
     }
     // Moon
@@ -57,16 +58,20 @@ function toggleSparkle() {
     moon.style.top = "10vh";
     moon.style.left = "10vw";
     container.appendChild(moon);
-    // Planets
-    const planets = ['🌍', '🌎', '🌕'];
-    for (let i = 0; i < 3; i++) {
-      const planet = document.createElement("div");
-      planet.className = "night-planet";
-      planet.innerText = planets[i];
-      planet.style.top = Math.random() * 40 + 20 + "vh";
-      planet.style.left = Math.random() * 70 + 15 + "vw";
-      container.appendChild(planet);
-    }
+    // Shooting Star
+    const shootingStar = document.createElement("div");
+    shootingStar.className = "shooting-star";
+    shootingStar.style.top = Math.random() * 50 + "vh";
+    shootingStar.style.left = "90vw";
+    shootingStar.style.animationDuration = "5s";
+    container.appendChild(shootingStar);
+    // Comet
+    const comet = document.createElement("div");
+    comet.className = "comet";
+    comet.style.top = Math.random() * 30 + "vh";
+    comet.style.left = "80vw";
+    comet.style.animationDuration = "8s";
+    container.appendChild(comet);
     // Constellation (e.g., Big Dipper)
     const constellation = document.createElement("div");
     constellation.className = "constellation";
@@ -80,6 +85,17 @@ function toggleSparkle() {
       <div class="constellation-star" style="top: 50vh; left: 50vw;"></div>
     `;
     container.appendChild(constellation);
+    // Additional Constellation (e.g., Orion)
+    const constellation2 = document.createElement("div");
+    constellation2.className = "constellation";
+    constellation2.innerHTML = `
+      <div class="constellation-star" style="top: 60vh; left: 30vw;"></div>
+      <div class="constellation-star" style="top: 65vh; left: 35vw;"></div>
+      <div class="constellation-star" style="top: 70vh; left: 30vw;"></div>
+      <div class="constellation-star" style="top: 70vh; left: 40vw;"></div>
+      <div class="constellation-star" style="top: 75vh; left: 35vw;"></div>
+    `;
+    container.appendChild(constellation2);
   } else {
     body.classList.remove("sparkle-mode");
     container.innerHTML = '';
