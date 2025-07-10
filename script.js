@@ -37,7 +37,7 @@ function throwFlowers() {
   }
 }
 
-// Sparkle mode with night background and stars
+// Sparkle mode with night background, stars, moon, planets, and constellations
 function toggleSparkle() {
   const body = document.body;
   const container = document.getElementById("stars-container");
@@ -50,6 +50,35 @@ function toggleSparkle() {
       star.style.left = Math.random() * 100 + "vw";
       container.appendChild(star);
     }
+    // Add moon
+    const moon = document.createElement("div");
+    moon.className = "night-moon";
+    moon.style.top = "10vh";
+    moon.style.left = "10vw";
+    container.appendChild(moon);
+    // Add planets
+    const planets = ['🌍', '🌎', '🌕'];
+    for (let i = 0; i < 3; i++) {
+      const planet = document.createElement("div");
+      planet.className = "night-planet";
+      planet.innerText = planets[i];
+      planet.style.top = Math.random() * 40 + "vh";
+      planet.style.left = Math.random() * 80 + "vw";
+      container.appendChild(planet);
+    }
+    // Add simple constellation (e.g., Big Dipper)
+    const constellation = document.createElement("div");
+    constellation.className = "constellation";
+    constellation.innerHTML = `
+      <div class="constellation-star" style="top: 20vh; left: 20vw;"></div>
+      <div class="constellation-star" style="top: 25vh; left: 25vw;"></div>
+      <div class="constellation-star" style="top: 30vh; left: 30vw;"></div>
+      <div class="constellation-star" style="top: 35vh; left: 35vw;"></div>
+      <div class="constellation-star" style="top: 40vh; left: 40vw;"></div>
+      <div class="constellation-star" style="top: 45vh; left: 45vw;"></div>
+      <div class="constellation-star" style="top: 50vh; left: 50vw;"></div>
+    `;
+    container.appendChild(constellation);
   } else {
     body.classList.remove("sparkle-mode");
     container.innerHTML = '';
