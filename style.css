@@ -109,9 +109,18 @@ button:hover {
   z-index: 5;
 }
 
+.falling-petal {
+  animation: petalFall 6s linear forwards;
+}
+
 @keyframes flowerFall {
   0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-  100% { transform: translateY(110vh) rotate(360deg); opacity: 0.9; }
+  100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+
+@keyframes petalFall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(120vh) rotate(720deg); opacity: 0; }
 }
 
 /* Garden bottom */
@@ -234,4 +243,5 @@ button:hover {
   .shooting-star { width: 1px; height: 1px; }
   .comet { width: 2px; height: 2px; }
   .constellation-star { width: 3px; height: 3px; }
+  .falling-petal { font-size: 1rem; }
 }
