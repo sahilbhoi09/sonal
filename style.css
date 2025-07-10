@@ -153,6 +153,47 @@ button:hover {
   z-index: 1;
 }
 
+/* Night sky elements */
+.night-moon {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 20px #fff;
+  animation: moonGlow 4s infinite alternate;
+}
+
+@keyframes moonGlow {
+  0% { box-shadow: 0 0 10px #fff; }
+  100% { box-shadow: 0 0 30px #fff; }
+}
+
+.night-planet {
+  position: absolute;
+  font-size: 2rem;
+  animation: planetOrbit 20s linear infinite;
+}
+
+@keyframes planetOrbit {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.constellation {
+  position: absolute;
+  z-index: 2;
+}
+
+.constellation-star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 5px #fff;
+}
+
 /* Fireworks */
 #fireworks-canvas {
   position: fixed;
@@ -171,4 +212,6 @@ button:hover {
   .buttons { gap: 8px; }
   .floating-item { font-size: 1rem; }
   .falling-flower { font-size: 1.2rem; }
+  .night-moon { width: 30px; height: 30px; }
+  .night-planet { font-size: 1.5rem; }
 }
