@@ -177,49 +177,56 @@ window.addEventListener('resize', () => {
 
 // New Feature 1: Click to Spawn Elements
 document.addEventListener('click', (e) => {
-  const container = document.getElementById('stars-container');
-  const rand = Math.random();
-  if (rand < 0.7) { // 70% chance for flower
-    const flower = document.createElement('div');
-    const flowerTypes = ['🌸', '🌹', '🌺', '🌷', '🍃'];
-    flower.className = 'falling-flower';
-    flower.innerText = flowerTypes[Math.floor(Math.random() * flowerTypes.length)];
-    flower.style.left = e.clientX + 'px';
-    flower.style.top = e.clientY + 'px';
-    flower.style.fontSize = 1.5 + Math.random() * 1 + 'rem';
-    if (flower.innerText === '🍃') flower.className += ' falling-petal';
-    container.appendChild(flower);
-    flower.addEventListener('animationend', () => flower.remove(), { once: true });
-  } else if (rand < 0.9) { // 20% chance for shooting star
-    const shootingStar = document.createElement('div');
-    shootingStar.className = 'shooting-star';
-    shootingStar.style.left = e.clientX + 'px';
-    shootingStar.style.top = e.clientY + 'px';
-    shootingStar.style.animationDuration = '5s';
-    container.appendChild(shootingStar);
-    shootingStar.addEventListener('animationend', () => shootingStar.remove(), { once: true });
-  } else { // 10% chance for comet
-    const comet = document.createElement('div');
-    comet.className = 'comet';
-    comet.style.left = e.clientX + 'px';
-    comet.style.top = e.clientY + 'px';
-    comet.style.animationDuration = '8s';
-    container.appendChild(comet);
-    comet.addEventListener('animationend', () => comet.remove(), { once: true });
+  if (e.target.tagName !== 'BUTTON') { // Prevent button clicks from triggering spawn
+    const container = document.getElementById('stars-container');
+    const rand = Math.random();
+    if (rand < 0.7) { // 70% chance for flower
+      const flower = document.createElement('div');
+      const flowerTypes = ['🌸', '🌹', '🌺', '🌷', '🍃'];
+      flower.className = 'falling-flower';
+      flower.innerText = flowerTypes[Math.floor(Math.random() * flowerTypes.length)];
+      flower.style.left = (e.clientX / window.innerWidth * 100) + 'vw';
+      flower.style.top = (e.clientY / window.innerHeight * 100) + 'vh';
+      flower.style.fontSize = 1.5 + Math.random() * 1 + 'rem';
+      if (flower.innerText === '🍃') flower.className += ' falling-petal';
+      container.appendChild(flower);
+      flower.addEventListener('animationend', () => flower.remove(), { once: true });
+    } else if (rand < 0.9) { // 20% chance for shooting star
+      const shootingStar = document.createElement('div');
+      shootingStar.className = 'shooting-star';
+      shootingStar.style.left = (e.clientX / window.innerWidth * 100) + 'vw';
+      shootingStar.style.top = (e.clientY / window.innerHeight * 100) + 'vh';
+      shootingStar.style.animationDuration = '5s';
+      container.appendChild(shootingStar);
+      shootingStar.addEventListener('animationend', () => shootingStar.remove(), { once: true });
+    } else { // 10% chance for comet
+      const comet = document.createElement('div');
+      comet.className = 'comet';
+      comet.style.left = (e.clientX / window.innerWidth * 100) + 'vw';
+      comet.style.top = (e.clientY / window.innerHeight * 100) + 'vh';
+      comet.style.animationDuration = '8s';
+      container.appendChild(comet);
+      comet.addEventListener('animationend', () => comet.remove(), { once: true });
+    }
   }
-});
+}, { passive: true });
 
 // New Feature 4: Customizable Sky Colors
 function setSkyColor(gradient) {
-  document.body.classList.add('sparkle-mode'); // Ensure sparkle mode is active
-  document.body.style.background = gradient;
+  document.body.classList.add('sparkle-mode');
+  document.body.style.background = gradient + ', url(\'https://via.placeholder.com/1920x1080.png?text=Milky+Way+Background\')';
+  document.body.style.backgroundSize = 'cover';
+  document.body.style.backgroundPosition = 'center';
+  document.body.style.backgroundRepeat = 'no-repeat';
 }
 
-document.getElementById('color-buttons').innerHTML = `
-  <button onclick="setSkyColor('linear-gradient(to bottom, #0a0a2a, #1a1a3a, #2a2a4a)')">Dark Blue</button>
-  <button onclick="setSkyColor('linear-gradient(to bottom, #2a0033, #4b0062, #6b008b)')">Purple</button>
-  <button onclick="setSkyColor('linear-gradient(to bottom, #000000, #1a1a1a, #333333)')">Black</button>
-`;
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('color-buttons').innerHTML = `
+    <button onclick="setSkyColor('linear-gradient(to bottom, #0a0a2a, #1a1a3a, #2a2a4a)')">Dark Blue</button>
+    <button onclick="setSkyColor('linear-gradient(to bottom, #2a0033, #4b0062, #6b008b)')">Purple</button>
+    <button onclick="setSkyColor('linear-gradient(to bottom, #000000, #1a1a1a, #333333)')">Black</button>
+  `;
+});
 
 // New Feature 10: Interactive Fireworks
 let fireworkColor = 'white';
@@ -229,47 +236,48 @@ function updateFireworkColor(color) {
 }
 
 function launchCustomFirework(e) {
-  const x = e.clientX;
-  const y = canvas.height;
-  const colors = [fireworkColor];
+  if (e.target.tagName !== 'BUTTON') { // Prevent button clicks from triggering fireworks
+    const x = e.clientX;
+    const y = canvas.height;
+    const colors = [fireworkColor];
 
-  let firework = {
-    x: x,
-    y: y,
-    speedY: -10,
-    accelY: 0.2,
-    life: 50
-  };
+    let firework = {
+      x: x,
+      y: y,
+      speedY: -10,
+      accelY: 0.2,
+      life: 50
+    };
 
-  function launch() {
-    if (firework.life > 0) {
-      firework.y += firework.speedY;
-      firework.speedY += firework.accelY;
-      firework.life--;
-      ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear only for this firework's launch
-      ctx.beginPath();
-      ctx.arc(firework.x, firework.y, 5, 0, Math.PI * 2);
-      ctx.fillStyle = 'white';
-      ctx.fill();
-      requestAnimationFrame(launch);
-    } else {
-      for (let i = 0; i < 100; i++) {
-        fireworks.push({
-          x: firework.x,
-          y: firework.y,
-          speedX: Math.random() * 6 - 3,
-          speedY: Math.random() * -6 - 2,
-          radius: 2 + Math.random() * 2,
-          color: colors[0],
-          life: 100
-        });
+    function launch() {
+      if (firework.life > 0) {
+        firework.y += firework.speedY;
+        firework.speedY += firework.accelY;
+        firework.life--;
+        ctx.beginPath();
+        ctx.arc(firework.x, firework.y, 5, 0, Math.PI * 2);
+        ctx.fillStyle = 'white';
+        ctx.fill();
+        requestAnimationFrame(launch);
+      } else {
+        for (let i = 0; i < 100; i++) {
+          fireworks.push({
+            x: firework.x,
+            y: firework.y,
+            speedX: Math.random() * 6 - 3,
+            speedY: Math.random() * -6 - 2,
+            radius: 2 + Math.random() * 2,
+            color: colors[0],
+            life: 100
+          });
+        }
       }
     }
+    launch();
   }
-  launch();
 }
 
-document.addEventListener('click', (e) => launchCustomFirework(e), { capture: true });
+document.addEventListener('click', (e) => launchCustomFirework(e), { capture: true, passive: true });
 
 function fireworkShow() {
   const intervals = [1000, 1500, 2000];
@@ -281,14 +289,29 @@ function fireworkShow() {
   });
 }
 
-document.getElementById('firework-show').innerHTML = '<button onclick="fireworkShow()">Firework Show</button>';
-document.getElementById('color-picker').innerHTML = `
-  <select onchange="updateFireworkColor(this.value)">
-    <option value="red">Red</option>
-    <option value="orange">Orange</option>
-    <option value="yellow">Yellow</option>
-    <option value="white">White</option>
-    <option value="blue">Blue</option>
-    <option value="cyan">Cyan</option>
-  </select>
-`;
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('firework-show').innerHTML = '<button onclick="fireworkShow()">Firework Show</button>';
+  document.getElementById('background-selector').innerHTML = `
+    <select onchange="setBackground(this.value)">
+      <option value="normal">Back to Normal</option>
+      <option value="nebula">Nebula</option>
+      <option value="galaxy">Galaxy</option>
+      <option value="aurora">Aurora</option>
+    </select>
+  `;
+});
+
+function setBackground(theme) {
+  const backgrounds = {
+    normal: 'linear-gradient(45deg, #ffe0ec, #ffd6e8, #ffccd7)',
+    nebula: 'linear-gradient(to bottom, #1a0033, #4b0062, #8a2be2)',
+    galaxy: 'linear-gradient(to bottom, #0a0a2a, #1a1a3a, #2a2a4a)',
+    aurora: 'linear-gradient(to bottom, #00b7eb, #ff69b4, #9b59b6)'
+  };
+  document.body.style.background = backgrounds[theme] + (theme !== 'normal' ? ', url(\'https://via.placeholder.com/1920x1080.png?text=Milky+Way+Background\')' : '');
+  document.body.style.backgroundSize = 'cover';
+  document.body.style.backgroundPosition = 'center';
+  document.body.style.backgroundRepeat = 'no-repeat';
+  if (theme !== 'normal') document.body.classList.add('sparkle-mode');
+  else document.body.classList.remove('sparkle-mode');
+}
