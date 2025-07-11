@@ -81,15 +81,13 @@ function handleOption(option) {
     content.style.display = 'none';
     gallery.style.display = 'flex';
     backBtn.classList.add('active');
-    // To see pictures, upload them to a web-accessible location (e.g., imgur.com or your own server)
-    // Replace the URLs below with the actual image links
     const images = [
-      'https://i.imgur.com/placeholder1.jpg', // Replace with image URL 1
-      'https://i.imgur.com/placeholder2.jpg', // Replace with image URL 2
-      'https://i.imgur.com/placeholder3.jpg', // Replace with image URL 3
-      'https://i.imgur.com/placeholder4.jpg', // Replace with image URL 4
-      'https://i.imgur.com/placeholder5.jpg', // Replace with image URL 5
-      'https://i.imgur.com/placeholder6.jpg'  // Replace with image URL 6
+      'https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80', // Mountain (Alps)
+      'https://images.pexels.com/photos/2372469/pexels-photo-2372469.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', // Glacier (Iceland)
+      'https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80', // Forest (Rocky Mountains)
+      'https://images.pexels.com/photos/2387873/pexels-photo-2387873.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', // Waterfall (Yosemite)
+      'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80', // Sunset (Grand Canyon)
+      'https://images.pexels.com/photos/1743220/pexels-photo-1743220.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' // Beach (Hawaii)
     ];
     images.forEach((img, index) => {
       const div = document.createElement('div');
@@ -112,7 +110,7 @@ function handleSubOption(option, sub) {
   backBtn.classList.add('active');
   if (option === 2) {
     if (sub === 'S') {
-      content.innerHTML = '<div class="sad-option" style="font-family: \'Dancing Script\', cursive;">Call Sahil, your light awaits for you,💖💖💖...</div>';
+      content.innerHTML = '<div class="sad-option" style="font-family: \'Dancing Script\', cursive;">Call Sahil, your light awaits...</div>';
     } else if (sub === 'M') {
       content.innerHTML = '<div class="sad-option" style="font-family: \'Dancing Script\', cursive;">Remember your memories in your lock folder, a treasure within...</div>';
     }
