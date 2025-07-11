@@ -82,7 +82,7 @@ function handleOption(option) {
     gallery.style.display = 'flex';
     backBtn.classList.add('active');
     const images = [
-      'https://assets.grok.com/users/ea085a28-8d18-467a-9cb4-23456bec4ba0/3f75aacb-fb8f-4669-ab31-f415d455086f/preview-image',
+      'https://example.com/beauty2.jpg',
       'https://example.com/beauty2.jpg',
       'https://example.com/beauty3.jpg',
       'https://example.com/beauty4.jpg',
