@@ -110,6 +110,7 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let fireworks = [];
+let butterflies = []; // Track butterflies
 
 function startFirework() {
   const x = Math.random() * canvas.width;
@@ -175,7 +176,7 @@ window.addEventListener('resize', () => {
   canvas.height = window.innerHeight;
 });
 
-// New Feature 1: Click to Spawn Elements (only on non-button areas)
+// New Feature 1: Click to Spawn Elements and Butterflies
 document.addEventListener('click', (e) => {
   if (e.target.tagName !== 'BUTTON' && !e.target.closest('.container')) {
     const container = document.getElementById('stars-container');
@@ -199,14 +200,30 @@ document.addEventListener('click', (e) => {
       shootingStar.style.animationDuration = '5s';
       container.appendChild(shootingStar);
       shootingStar.addEventListener('animationend', () => shootingStar.remove(), { once: true });
-    } else { // 10% chance for comet
-      const comet = document.createElement('div');
-      comet.className = 'comet';
-      comet.style.left = (e.clientX / window.innerWidth * 100) + 'vw';
-      comet.style.top = (e.clientY / window.innerHeight * 100) + 'vh';
-      comet.style.animationDuration = '8s';
-      container.appendChild(comet);
-      comet.addEventListener('animationend', () => comet.remove(), { once: true });
+    } else { // 10% chance for comet or butterfly
+      if (Math.random() < 0.5) { // 5% chance for comet
+        const comet = document.createElement('div');
+        comet.className = 'comet';
+        comet.style.left = (e.clientX / window.innerWidth * 100) + 'vw';
+        comet.style.top = (e.clientY / window.innerHeight * 100) + 'vh';
+        comet.style.animationDuration = '8s';
+        container.appendChild(comet);
+        comet.addEventListener('animationend', () => comet.remove(), { once: true });
+      } else { // 5% chance for butterfly
+        if (butterflies.length < 5) { // Limit to 5 butterflies
+          const butterfly = document.createElement('div');
+          butterfly.className = 'flying-butterfly';
+          butterfly.style.left = (e.clientX / window.innerWidth * 100) + 'vw';
+          butterfly.style.top = (e.clientY / window.innerHeight * 100) + 'vh';
+          butterfly.style.animationDuration = (5 + Math.random() * 5) + 's';
+          container.appendChild(butterfly);
+          butterflies.push(butterfly);
+          butterfly.addEventListener('animationend', () => {
+            butterfly.remove();
+            butterflies = butterflies.filter(b => b !== butterfly);
+          }, { once: true });
+        }
+      }
     }
   }
 }, { passive: true });
@@ -228,7 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
   `;
 });
 
-// New Feature 10: Interactive Fireworks (only on non-button areas)
+// New Feature 10: Interactive Fireworks
 let fireworkColor = 'white';
 
 function updateFireworkColor(color) {
@@ -308,10 +325,15 @@ function setBackground(theme) {
     galaxy: 'linear-gradient(to bottom, #0a0a2a, #1a1a3a, #2a2a4a)',
     aurora: 'linear-gradient(to bottom, #00b7eb, #ff69b4, #9b59b6)'
   };
-  document.body.style.background = backgrounds[theme] + (theme !== 'normal' ? ', url(\'https://via.placeholder.com/1920x1080.png?text=Milky+Way+Background\')' : '');
+  document.body.style.transition = 'background 1s ease'; // Smooth transition
+  document.body.style.background = backgrounds[theme];
+  if (theme !== 'normal') {
+    document.body.style.background += ', url(\'https://via.placeholder.com/1920x1080.png?text=Milky+Way+Background\')';
+    document.body.classList.add('sparkle-mode');
+  } else {
+    document.body.classList.remove('sparkle-mode');
+  }
   document.body.style.backgroundSize = 'cover';
   document.body.style.backgroundPosition = 'center';
   document.body.style.backgroundRepeat = 'no-repeat';
-  if (theme !== 'normal') document.body.classList.add('sparkle-mode');
-  else document.body.classList.remove('sparkle-mode');
 }
