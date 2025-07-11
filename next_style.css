@@ -61,15 +61,6 @@ button:hover {
   box-shadow: 0 0 10px rgba(168, 230, 207, 0.7);
 }
 
-.sad-option a[href*="instagram"] {
-  color: #E1306C; /* Instagram pink */
-  text-decoration: underline;
-}
-
-.sad-option a[href*="instagram"]:hover {
-  color: #FF3366;
-}
-
 @media (max-width: 768px) {
   .name { font-size: 3rem; }
   .comfort-container { padding: 20px; }
