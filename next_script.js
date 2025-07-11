@@ -56,9 +56,9 @@ function handleOption(option) {
 
   if (option === 1) { // Wanna listen to song??
     const songs = [
-      'https://www.youtube.com/watch?v=XLlO1v6e2rQ', // Imagine - John Lennon
-      'https://www.youtube.com/watch?v=YQHsXMglC9A',  // Someone Like You - Adele
-      'https://www.youtube.com/watch?v=dQw4w9WgXcQ'   // Placeholder (e.g., Never Gonna Give You Up)
+      'https://www.youtube.com/watch?v=502xhwUiGTs&list=RD502xhwUiGTs&start_radio=1', // Imagine - John Lennon
+      'https://www.youtube.com/watch?v=9JDSGhhiOwI&list=RDGMEMPipJmhsMq3GHGrfqf4WIqA&start_radio=1&rv=502xhwUiGTs',  // Someone Like You - Adele
+      'https://www.youtube.com/watch?v=0KozfDYK1EU&list=RD0KozfDYK1EU&start_radio=1'   // Placeholder (e.g., Never Gonna Give You Up)
     ];
     let html = '<div class="sad-options">';
     songs.forEach(song => {
@@ -82,7 +82,7 @@ function handleOption(option) {
     gallery.style.display = 'flex';
     backBtn.classList.add('active');
     const images = [
-      'https://example.com/beauty1.jpg',
+      'https://assets.grok.com/users/ea085a28-8d18-467a-9cb4-23456bec4ba0/3f75aacb-fb8f-4669-ab31-f415d455086f/preview-image',
       'https://example.com/beauty2.jpg',
       'https://example.com/beauty3.jpg',
       'https://example.com/beauty4.jpg',
