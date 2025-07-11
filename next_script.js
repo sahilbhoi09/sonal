@@ -81,13 +81,14 @@ function handleOption(option) {
     content.style.display = 'none';
     gallery.style.display = 'flex';
     backBtn.classList.add('active');
+    // Placeholder images - PLEASE REPLACE WITH YOUR 5-6 IMAGE URLs BELOW
     const images = [
-      'https://via.placeholder.com/250x250.png?text=Sunset+Bliss',
-      'https://via.placeholder.com/250x250.png?text=Mountain+Serenity',
-      'https://via.placeholder.com/250x250.png?text=Ocean+Calm',
-      'https://via.placeholder.com/250x250.png?text=Floral+Dream',
-      'https://via.placeholder.com/250x250.png?text=Starry+Night',
-      'https://via.placeholder.com/250x250.png?text=Forest+Glow'
+      'https://via.placeholder.com/250x250.png?text=Image1',
+      'https://via.placeholder.com/250x250.png?text=Image2',
+      'https://via.placeholder.com/250x250.png?text=Image3',
+      'https://via.placeholder.com/250x250.png?text=Image4',
+      'https://via.placeholder.com/250x250.png?text=Image5',
+      'https://via.placeholder.com/250x250.png?text=Image6'
     ];
     images.forEach((img, index) => {
       const div = document.createElement('div');
