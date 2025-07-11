@@ -112,7 +112,7 @@ function handleSubOption(option, sub) {
   backBtn.classList.add('active');
   if (option === 2) {
     if (sub === 'S') {
-      content.innerHTML = '<div class="sad-option" style="font-family: \'Dancing Script\', cursive;">Call Sahil, your light awaits...</div>';
+      content.innerHTML = '<div class="sad-option" style="font-family: \'Dancing Script\', cursive;">Call Sahil, your light awaits for you,💖💖💖...</div>';
     } else if (sub === 'M') {
       content.innerHTML = '<div class="sad-option" style="font-family: \'Dancing Script\', cursive;">Remember your memories in your lock folder, a treasure within...</div>';
     }
