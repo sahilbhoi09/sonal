@@ -3,17 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>select your mood</title>
+  <title>Sonal’s Comfort Corner</title>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="next_style.css">
   <style>
-    .mood-container {
+    .comfort-container {
       text-align: center;
       padding: 40px;
       max-width: 1200px;
       margin: 0 auto;
       position: relative;
       z-index: 2;
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 15px;
     }
     .mood-buttons {
       margin: 20px 0;
@@ -22,67 +24,112 @@
       gap: 15px;
     }
     .mood-buttons button {
-      font-size: 2rem;
-      padding: 10px 20px;
+      font-size: 2.5rem;
+      padding: 15px 25px;
       border: none;
-      border-radius: 10px;
+      border-radius: 50%;
       cursor: pointer;
-      transition: transform 0.3s;
+      background: #d3a4d6;
+      color: #fff;
+      transition: transform 0.3s, opacity 0.3s;
     }
     .mood-buttons button:hover {
       transform: scale(1.2);
     }
-    #mood-content {
+    #comfort-content {
       margin-top: 20px;
       padding: 20px;
       border-radius: 10px;
       display: none;
+      color: #fff;
     }
-    #mood-content.active {
+    #comfort-content.active {
       display: block;
     }
-    .sad-options, .game-options {
+    .sad-options {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 15px;
       justify-content: center;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInSlide 0.5s forwards;
     }
-    .sad-options div {
-      padding: 10px;
+    .sad-option {
+      padding: 15px 25px;
       background: rgba(255, 255, 255, 0.1);
-      border-radius: 5px;
-      color: #fff;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.3s;
     }
-    .game-options a {
-      text-decoration: none;
-      color: #fff;
-      padding: 10px;
-      background: #ff4081;
-      border-radius: 5px;
+    .sad-option:hover {
+      transform: scale(1.05);
     }
-    .game-options a:hover {
-      background: #d81b60;
+    #image-gallery {
+      display: none;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      animation: fadeIn 0.5s forwards;
+    }
+    .gallery-image {
+      width: 200px;
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 10px;
+      opacity: 0;
+      animation: zoomIn 0.5s forwards;
+    }
+    #back-button {
+      margin-top: 20px;
+      display: none;
+    }
+    #back-button.active {
+      display: block;
+    }
+    #petal-rain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 1;
+    }
+    @keyframes fadeOut {
+      to { opacity: 0; transform: translateY(-20px); }
+    }
+    @keyframes fadeInSlide {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes zoomIn {
+      from { transform: scale(0); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
     }
     @media (max-width: 768px) {
-      .mood-buttons button { font-size: 1.5rem; padding: 8px 15px; }
-      .sad-options div, .game-options a { font-size: 0.9rem; padding: 8px; }
+      .comfort-container { padding: 20px; }
+      .mood-buttons button { font-size: 2rem; padding: 10px 20px; }
+      .sad-option { padding: 10px 15px; }
+      .gallery-image { width: 150px; height: 150px; }
     }
   </style>
 </head>
 <body>
-  <div class="mood-container">
-    <h1 class="name">Mood-Based Haven</h1>
+  <div id="petal-rain"></div>
+  <div class="comfort-container">
+    <h1 class="name">Sonal’s Comfort Corner</h1>
     <div class="mood-buttons">
-      <button onclick="setMood(1)">😢</button>
-      <button onclick="setMood(2)">🙁</button>
-      <button onclick="setMood(3)">😐</button>
-      <button onclick="setMood(4)">🙂</button>
-      <button onclick="setMood(5)">😄</button>
+      <button id="sad-btn" onclick="setMood(1)">😢</button>
     </div>
-    <div id="mood-content"></div>
-    <div class="buttons">
-      <button class="main-btn" onclick="goBack()">Back to Cosmic Garden</button>
-    </div>
+    <div id="comfort-content"></div>
+    <div id="image-gallery"></div>
+    <div id="back-button"><button class="main-btn" onclick="goBack()">Back</button></div>
   </div>
   <canvas id="fireworks-canvas"></canvas>
   <script src="next_script.js"></script>
