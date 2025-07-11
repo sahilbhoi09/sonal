@@ -6,37 +6,20 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(45deg, #ff6f61, #d3a4d6, #a8e6cf);
+  background: linear-gradient(135deg, #1a0033, #4b0062, #6b008b);
   overflow-x: hidden;
   min-height: 100vh;
   transition: background 1s ease;
   position: relative;
-}
-
-body.sparkle-mode {
-  background: linear-gradient(to bottom, #0a0a2a, #1a1a3a, #2a2a4a), url('https://via.placeholder.com/1920x1080.png?text=Milky+Way+Background');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: white;
-}
-
-.container, .mood-container {
-  text-align: center;
-  padding: 40px;
-  max-width: 1200px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 2;
+  color: #fff;
 }
 
 .name {
   font-family: 'Great+Vibes', cursive;
   font-size: 4rem;
   color: #fff;
-  text-shadow: 0 0 10px #00ffff, 0 0 20px #ff00ff, 0 0 30px #ffeb3b;
-  background: radial-gradient(circle, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 70%), url('https://via.placeholder.com/500x100.png?text=Starry+Background');
-  background-size: cover;
+  text-shadow: 0 0 10px #a8e6cf, 0 0 20px #d3a4d6, 0 0 30px #ff6f61;
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 70%);
   padding: 10px 20px;
   border-radius: 15px;
   display: inline-block;
@@ -45,27 +28,7 @@ body.sparkle-mode {
 .buttons {
   margin-top: 30px;
   display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
   justify-content: center;
-}
-
-button {
-  padding: 12px 20px;
-  font-size: 1.1rem;
-  border: none;
-  border-radius: 20px;
-  background: linear-gradient(45deg, #fff, #f0e6f0);
-  color: #333;
-  box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
-}
-
-button:hover {
-  transform: scale(1.1);
-  background: linear-gradient(45deg, #f0e6f0, #fff);
-  box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.3);
 }
 
 .main-btn {
@@ -74,56 +37,22 @@ button:hover {
   font-weight: bold;
   font-size: 1.3rem;
   border: 2px solid #fff;
+  padding: 12px 25px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: transform 0.3s;
 }
 
-/* Floating icons with movement and rotation */
-#floating-icons {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.floating-item {
-  position: absolute;
-  font-size: 1.5rem;
-  border: 1px solid #fff;
-  border-radius: 50%;
-  padding: 4px;
-  opacity: 0.6;
-  animation: floatRight linear infinite;
-}
-
-@keyframes floatRight {
-  0% { transform: translateX(-10vw) rotate(0deg); }
-  100% { transform: translateX(110vw) rotate(360deg); }
-}
-
-@keyframes rotate {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-/* Flower rain from top */
-.falling-flower {
-  position: fixed;
-  top: -50px;
-  font-size: 1.5rem;
-  animation: flowerFall 5s linear forwards;
-  pointer-events: none;
-  z-index: 5;
+.main-btn:hover {
+  transform: scale(1.1);
 }
 
 .falling-petal {
+  position: absolute;
+  font-size: 1.5rem;
   animation: petalFall 6s linear forwards;
-}
-
-@keyframes flowerFall {
-  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-  100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+  pointer-events: none;
+  z-index: 1;
 }
 
 @keyframes petalFall {
@@ -131,116 +60,6 @@ button:hover {
   100% { transform: translateY(120vh) rotate(720deg); opacity: 0; }
 }
 
-/* Garden bottom */
-#flower-garden {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  z-index: 3;
-}
-
-/* Moving Stars */
-.moving-star {
-  position: absolute;
-  width: 2px;
-  height: 2px;
-  background: white;
-  border-radius: 50%;
-  box-shadow: 0 0 5px #fff;
-  animation: starMove 30s linear infinite;
-}
-
-@keyframes starMove {
-  0% { transform: translate(0, 0); }
-  50% { transform: translate(10vw, -10vh); }
-  100% { transform: translate(20vw, 0); }
-}
-
-/* Night Moon */
-.night-moon {
-  position: absolute;
-  width: 200px;
-  height: 200px;
-  background: url('https://via.placeholder.com/200x200.png?text=Crescent+Moon');
-  background-size: cover;
-  border-radius: 50%;
-  z-index: 2;
-}
-
-/* Shooting Star */
-.shooting-star {
-  position: absolute;
-  width: 2px;
-  height: 2px;
-  background: linear-gradient(to right, transparent, #fff, transparent);
-  box-shadow: 0 0 10px #fff;
-  animation: shoot 5s linear infinite;
-  z-index: 2;
-}
-
-@keyframes shoot {
-  0% { transform: translate(100vw, 50vh) scale(1); opacity: 1; }
-  100% { transform: translate(-100vw, -50vh) scale(0); opacity: 0; }
-}
-
-/* Comet */
-.comet {
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  background: linear-gradient(to right, transparent, #87CEEB, transparent);
-  box-shadow: 0 0 15px #87CEEB;
-  animation: cometMove 8s linear infinite;
-  z-index: 2;
-}
-
-@keyframes cometMove {
-  0% { transform: translate(90vw, 30vh) scale(1); opacity: 1; }
-  100% { transform: translate(-90vw, 70vh) scale(0); opacity: 0; }
-}
-
-/* Constellation */
-.constellation {
-  position: absolute;
-  z-index: 2;
-}
-
-.constellation-star {
-  position: absolute;
-  width: 5px;
-  height: 5px;
-  background: white;
-  border-radius: 50%;
-  box-shadow: 0 0 10px #fff;
-  z-index: 2;
-}
-
-/* Flying Butterfly */
-.flying-butterfly {
-  position: absolute;
-  font-size: 2rem;
-  animation: butterflyFloat 5s ease-in-out infinite, butterflyFlap 0.5s alternate infinite;
-  pointer-events: none;
-  z-index: 5;
-  color: #ff69b4;
-}
-
-@keyframes butterflyFloat {
-  0% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-10vh) rotate(20deg); }
-  100% { transform: translateY(0) rotate(0deg); }
-}
-
-@keyframes butterflyFlap {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.1); }
-}
-
-/* Fireworks */
 #fireworks-canvas {
   position: fixed;
   top: 0;
@@ -251,26 +70,44 @@ button:hover {
   pointer-events: none;
 }
 
-/* Confetti for Very Happy */
-.confetti {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background: #ff0;
-  border-radius: 50%;
-  animation: fall 2s linear infinite;
+textarea {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
 }
 
-@keyframes fall {
-  0% { transform: translateY(-20vh); opacity: 1; }
-  100% { transform: translateY(100vh); opacity: 0; }
+button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 10px;
+  background: #a8e6cf;
+  color: #333;
+  cursor: pointer;
+  transition: transform 0.3s;
 }
 
-/* Mobile adjustments */
+button:hover {
+  transform: scale(1.05);
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 @media (max-width: 768px) {
   .name { font-size: 2.5rem; }
-  .mood-container { padding: 20px; }
-  .mood-buttons button { font-size: 1.5rem; padding: 8px 15px; }
-  .sad-options div, .game-options a { font-size: 0.9rem; padding: 8px; }
-  .confetti { width: 8px; height: 8px; }
+  .comfort-container { padding: 20px; }
+  .mood-buttons button { font-size: 2rem; padding: 10px 20px; }
+  .sad-option { padding: 10px 15px; }
+  .gallery-image { width: 150px; height: 150px; }
+  .main-btn { font-size: 1.1rem; padding: 10px 20px; }
 }
