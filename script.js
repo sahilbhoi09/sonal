@@ -213,6 +213,7 @@ document.addEventListener('click', (e) => {
         if (butterflies.length < 5) { // Limit to 5 butterflies
           const butterfly = document.createElement('div');
           butterfly.className = 'flying-butterfly';
+          butterfly.innerText = '🦋';
           butterfly.style.left = (e.clientX / window.innerWidth * 100) + 'vw';
           butterfly.style.top = (e.clientY / window.innerHeight * 100) + 'vh';
           butterfly.style.animationDuration = (5 + Math.random() * 5) + 's';
@@ -325,15 +326,15 @@ function setBackground(theme) {
     galaxy: 'linear-gradient(to bottom, #0a0a2a, #1a1a3a, #2a2a4a)',
     aurora: 'linear-gradient(to bottom, #00b7eb, #ff69b4, #9b59b6)'
   };
-  document.body.style.transition = 'background 1s ease'; // Smooth transition
+  document.body.style.transition = 'background 1s ease'; // Ensure smooth transition
   document.body.style.background = backgrounds[theme];
-  if (theme !== 'normal') {
-    document.body.style.background += ', url(\'https://via.placeholder.com/1920x1080.png?text=Milky+Way+Background\')';
-    document.body.classList.add('sparkle-mode');
-  } else {
-    document.body.classList.remove('sparkle-mode');
-  }
   document.body.style.backgroundSize = 'cover';
   document.body.style.backgroundPosition = 'center';
   document.body.style.backgroundRepeat = 'no-repeat';
+  if (theme !== 'normal') {
+    document.body.classList.add('sparkle-mode');
+    document.body.style.background += ', url(\'https://via.placeholder.com/1920x1080.png?text=Milky+Way+Background\')';
+  } else {
+    document.body.classList.remove('sparkle-mode');
+  }
 }
