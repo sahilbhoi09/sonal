@@ -123,6 +123,13 @@
       color: #ff6f61;
       animation: floatUp 8s linear infinite;
     }
+    .sad-option a[href*="instagram"] {
+      color: #E1306C; /* Instagram pink */
+      text-decoration: underline;
+    }
+    .sad-option a[href*="instagram"]:hover {
+      color: #FF3366;
+    }
     @keyframes fadeOut {
       to { opacity: 0; transform: translateY(-30px); }
     }
@@ -161,6 +168,7 @@
     <div id="comfort-content"></div>
     <div id="image-gallery"></div>
     <div id="back-button"></div>
+    <div class="sad-option" onclick="viewConfessions()">View Past Confessions</div>
   </div>
   <script src="next_script.js"></script>
 </body>
