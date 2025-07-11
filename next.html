@@ -1,1 +1,90 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mood-Based Haven</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .mood-container {
+      text-align: center;
+      padding: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+    .mood-buttons {
+      margin: 20px 0;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    .mood-buttons button {
+      font-size: 2rem;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .mood-buttons button:hover {
+      transform: scale(1.2);
+    }
+    #mood-content {
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 10px;
+      display: none;
+    }
+    #mood-content.active {
+      display: block;
+    }
+    .sad-options, .game-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    .sad-options div {
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 5px;
+      color: #fff;
+    }
+    .game-options a {
+      text-decoration: none;
+      color: #fff;
+      padding: 10px;
+      background: #ff4081;
+      border-radius: 5px;
+    }
+    .game-options a:hover {
+      background: #d81b60;
+    }
+    @media (max-width: 768px) {
+      .mood-buttons button { font-size: 1.5rem; padding: 8px 15px; }
+      .sad-options div, .game-options a { font-size: 0.9rem; padding: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="mood-container">
+    <h1 class="name">Mood-Based Haven</h1>
+    <div class="mood-buttons">
+      <button onclick="setMood(1)">😢</button>
+      <button onclick="setMood(2)">🙁</button>
+      <button onclick="setMood(3)">😐</button>
+      <button onclick="setMood(4)">🙂</button>
+      <button onclick="setMood(5)">😄</button>
+    </div>
+    <div id="mood-content"></div>
+    <div class="buttons">
+      <button class="main-btn" onclick="goBack()">Back to Cosmic Garden</button>
+    </div>
+  </div>
+  <canvas id="fireworks-canvas"></canvas>
+  <script src="script.js"></script>
+</body>
+</html>
