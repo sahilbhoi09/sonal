@@ -126,7 +126,7 @@ function saveConfession() {
     let confessions = JSON.parse(localStorage.getItem('confessions') || '[]');
     confessions.push(confession);
     localStorage.setItem('confessions', JSON.stringify(confessions));
-    alert('Your confession is saved. View it under "Past Confessions" next time!');
+    alert('Your confession is saved. View it under "View Past Confessions"!');
     document.getElementById('confession-text').value = '';
   } else {
     alert('Please write something to save.');
@@ -157,7 +157,7 @@ window.addEventListener('resize', () => {
   canvas.height = window.innerHeight;
 });
 
-// Function to view past confessions (call this when adding a "View Past" button if desired)
+// Function to view past confessions
 function viewConfessions() {
   const confessions = JSON.parse(localStorage.getItem('confessions') || '[]');
   if (confessions.length > 0) {
