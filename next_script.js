@@ -5,11 +5,9 @@ function goBack() {
   content.innerHTML = '';
   gallery.innerHTML = '';
   gallery.style.display = 'none';
+  backBtn.innerHTML = '';
   backBtn.classList.remove('active');
-  document.querySelectorAll('.mood-buttons button').forEach(btn => btn.style.display = 'inline-block');
-  document.getElementById('petal-rain').innerHTML = '';
-  createPetals();
-  window.location.href = "index.html";
+  setMood(1); // Return to five-button menu
 }
 
 // Set sad mood
@@ -17,8 +15,8 @@ function setMood(mood) {
   const moodButtons = document.querySelectorAll('.mood-buttons button');
   moodButtons.forEach(btn => {
     if (btn !== event.target) {
-      btn.style.animation = 'fadeOut 0.5s forwards';
-      setTimeout(() => btn.style.display = 'none', 500);
+      btn.style.animation = 'fadeOut 0.6s forwards';
+      setTimeout(() => btn.style.display = 'none', 600);
     }
   });
   event.target.style.animation = 'none';
@@ -42,36 +40,41 @@ function setMood(mood) {
 
     const sadOptions = document.querySelectorAll('.sad-option');
     sadOptions.forEach((option, index) => {
-      setTimeout(() => option.style.animation = 'fadeInSlide 0.5s forwards', index * 100);
+      setTimeout(() => option.style.animation = 'fadeInSlide 0.6s forwards', index * 150);
     });
-  }, 600);
+    createHearts();
+  }, 700);
 }
 
 // Handle option clicks
 function handleOption(option) {
   const content = document.getElementById('comfort-content');
+  const backBtn = document.getElementById('back-button');
   content.innerHTML = '';
+  backBtn.innerHTML = '<button class="back-btn" onclick="goBack()">Back to Menu</button>';
+  backBtn.classList.add('active');
+
   if (option === 1) { // Wanna listen to song??
     const songs = [
       'https://www.youtube.com/watch?v=XLlO1v6e2rQ', // Imagine - John Lennon
-      'https://www.youtube.com/watch?v=dQw4w9WgXcQ', // Placeholder (e.g., Never Gonna Give You Up)
-      'https://www.youtube.com/watch?v=YQHsXMglC9A'  // Someone Like You - Adele
+      'https://www.youtube.com/watch?v=YQHsXMglC9A',  // Someone Like You - Adele
+      'https://www.youtube.com/watch?v=dQw4w9WgXcQ'   // Placeholder (e.g., Never Gonna Give You Up)
     ];
     let html = '<div class="sad-options">';
     songs.forEach(song => {
-      html += `<div class="comfort-option"><a href="${song}" target="_blank">Play Song</a></div>`;
+      html += `<div class="sad-option"><a href="${song}" target="_blank">Play Song</a></div>`;
     });
-    html += `<div class="comfort-option"><a href="https://www.youtube.com/" target="_blank">Others</a></div>`;
+    html += `<div class="sad-option"><a href="https://www.youtube.com/" target="_blank">Others</a></div>`;
     html += '</div>';
     content.innerHTML = html;
   } else if (option === 2) { // Missing someone
     let html = '<div class="sad-options">';
-    html += '<div class="sad-option" onclick="handleSubOption(2, \'S\')">S</div>';
-    html += '<div class="sad-option" onclick="handleSubOption(2, \'M\')">M</div>';
+    html += '<div class="sub-option" onclick="handleSubOption(2, \'S\')">S</div>';
+    html += '<div class="sub-option" onclick="handleSubOption(2, \'M\')">M</div>';
     html += '</div>';
     content.innerHTML = html;
   } else if (option === 3) { // Wanted love?
-    content.innerHTML = '<div class="comfort-option">8435149722 and 9770126819, you find love here!!!</div>';
+    content.innerHTML = '<div class="sad-option">8435149722 and 9770126819, you find love here!!!</div>';
   } else if (option === 4) { // Lets see some beauties
     const gallery = document.getElementById('image-gallery');
     const backBtn = document.getElementById('back-button');
@@ -79,125 +82,66 @@ function handleOption(option) {
     gallery.style.display = 'flex';
     backBtn.classList.add('active');
     const images = [
-      'https://via.placeholder.com/200x200.png?text=Beauty1',
-      'https://via.placeholder.com/200x200.png?text=Beauty2',
-      'https://via.placeholder.com/200x200.png?text=Beauty3',
-      'https://via.placeholder.com/200x200.png?text=Beauty4',
-      'https://via.placeholder.com/200x200.png?text=Beauty5',
-      'https://via.placeholder.com/200x200.png?text=Beauty6'
+      'https://via.placeholder.com/250x250.png?text=Sunset+Bliss',
+      'https://via.placeholder.com/250x250.png?text=Mountain+Serenity',
+      'https://via.placeholder.com/250x250.png?text=Ocean+Calm',
+      'https://via.placeholder.com/250x250.png?text=Floral+Dream',
+      'https://via.placeholder.com/250x250.png?text=Starry+Night',
+      'https://via.placeholder.com/250x250.png?text=Forest+Glow'
     ];
     images.forEach((img, index) => {
       const div = document.createElement('div');
       div.className = 'gallery-image';
       div.style.backgroundImage = `url(${img})`;
       gallery.appendChild(div);
-      setTimeout(() => div.style.animation = 'zoomIn 0.5s forwards', index * 100);
+      setTimeout(() => div.style.animation = 'zoomIn 0.6s forwards', index * 150);
     });
   } else if (option === 5) { // Confess your feeling?
-    content.innerHTML = '<div class="comfort-option"><textarea placeholder="Write your feelings here..." rows="4" cols="30"></textarea><button onclick="submitConfession()">Submit</button></div>';
+    content.innerHTML = '<div class="sad-option"><textarea placeholder="Pour your heart here..." rows="5" cols="40" style="font-family: \'Dancing Script\', cursive;"></textarea><button onclick="submitConfession()">Release</button></div>';
   }
 }
 
 // Handle sub-options for Missing someone
 function handleSubOption(option, sub) {
   const content = document.getElementById('comfort-content');
+  const backBtn = document.getElementById('back-button');
+  content.innerHTML = '';
+  backBtn.innerHTML = '<button class="back-btn" onclick="goBack()">Back to Menu</button>';
+  backBtn.classList.add('active');
   if (option === 2) {
     if (sub === 'S') {
-      content.innerHTML = '<div class="comfort-option">Call Sahil</div>';
+      content.innerHTML = '<div class="sad-option" style="font-family: \'Dancing Script\', cursive;">Call Sahil, your light awaits...</div>';
     } else if (sub === 'M') {
-      content.innerHTML = '<div class="comfort-option">Remember you have your memories in your lock folder</div>';
+      content.innerHTML = '<div class="sad-option" style="font-family: \'Dancing Script\', cursive;">Remember your memories in your lock folder, a treasure within...</div>';
     }
   }
 }
 
-// Submit confession (basic placeholder)
+// Submit confession
 function submitConfession() {
-  alert('Your feelings have been noted! Feel free to share with someone you trust.');
+  alert('Your heart’s whispers are safe with the stars. Share with someone when ready.');
 }
 
-// Petal rain animation
-function createPetals() {
-  const petalRain = document.getElementById('petal-rain');
-  for (let i = 0; i < 20; i++) {
-    const petal = document.createElement('div');
-    petal.className = 'falling-petal';
-    petal.innerText = '🍃';
-    petal.style.left = Math.random() * 100 + 'vw';
-    petal.style.animationDuration = 5 + Math.random() * 5 + 's';
-    petalRain.appendChild(petal);
+// Floating hearts animation
+function createHearts() {
+  const heartFloat = document.getElementById('heart-float');
+  for (let i = 0; i < 10; i++) {
+    const heart = document.createElement('div');
+    heart.className = 'floating-heart';
+    heart.innerText = '💖';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = 8 + Math.random() * 4 + 's';
+    heartFloat.appendChild(heart);
   }
 }
 
-document.addEventListener('DOMContentLoaded', createPetals);
+document.addEventListener('DOMContentLoaded', () => {
+  createHearts();
+});
 
-// Firework from bottom to top burst (optional, can be removed if not needed)
-const canvas = document.getElementById("fireworks-canvas");
-const ctx = canvas.getContext("2d");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let fireworks = [];
-
-function startFirework() {
-  const x = Math.random() * canvas.width;
-  const y = canvas.height;
-  const colors = ['red', 'orange', 'yellow', 'white', 'blue', 'cyan'];
-
-  let firework = {
-    x: x,
-    y: y,
-    speedY: -10,
-    accelY: 0.2,
-    life: 50
-  };
-
-  function launch() {
-    if (firework.life > 0) {
-      firework.y += firework.speedY;
-      firework.speedY += firework.accelY;
-      firework.life--;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.beginPath();
-      ctx.arc(firework.x, firework.y, 5, 0, Math.PI * 2);
-      ctx.fillStyle = 'white';
-      ctx.fill();
-      requestAnimationFrame(launch);
-    } else {
-      for (let i = 0; i < 100; i++) {
-        fireworks.push({
-          x: firework.x,
-          y: firework.y,
-          speedX: Math.random() * 6 - 3,
-          speedY: Math.random() * -6 - 2,
-          radius: 2 + Math.random() * 2,
-          color: colors[Math.floor(Math.random() * colors.length)],
-          life: 100
-        });
-      }
-    }
-  }
-  launch();
-}
-
-function animateFireworks() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  fireworks.forEach((p, index) => {
-    p.x += p.speedX;
-    p.y += p.speedY;
-    p.speedY += 0.05;
-    p.life--;
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-    ctx.fillStyle = p.color;
-    ctx.fill();
-    if (p.life <= 0) fireworks.splice(index, 1);
-  });
-  requestAnimationFrame(animateFireworks);
-}
-animateFireworks();
-
-// Handle resize for mobile compatibility
+// Resize handling
 window.addEventListener('resize', () => {
+  const canvas = document.getElementById('fireworks-canvas');
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 });
