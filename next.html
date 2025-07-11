@@ -3,43 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sonal’s Comfort Corner</title>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <title>Sonal’s Serenity Haven</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="next_style.css">
   <style>
     .comfort-container {
       text-align: center;
-      padding: 40px;
+      padding: 50px;
       max-width: 1200px;
       margin: 0 auto;
       position: relative;
       z-index: 2;
-      background: rgba(0, 0, 0, 0.7);
-      border-radius: 15px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(168, 230, 207, 0.5);
     }
     .mood-buttons {
-      margin: 20px 0;
+      margin: 30px 0;
       display: flex;
       justify-content: center;
-      gap: 15px;
+      gap: 20px;
     }
     .mood-buttons button {
-      font-size: 2.5rem;
-      padding: 15px 25px;
+      font-size: 3rem;
+      padding: 20px 30px;
       border: none;
       border-radius: 50%;
       cursor: pointer;
-      background: #d3a4d6;
+      background: linear-gradient(135deg, #d3a4d6, #a8e6cf);
       color: #fff;
+      text-shadow: 0 0 5px #fff;
       transition: transform 0.3s, opacity 0.3s;
     }
     .mood-buttons button:hover {
       transform: scale(1.2);
     }
     #comfort-content {
-      margin-top: 20px;
-      padding: 20px;
-      border-radius: 10px;
+      margin-top: 30px;
+      padding: 30px;
+      border-radius: 15px;
       display: none;
       color: #fff;
     }
@@ -49,37 +51,41 @@
     .sad-options {
       display: flex;
       flex-wrap: wrap;
-      gap: 15px;
+      gap: 20px;
       justify-content: center;
       opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInSlide 0.5s forwards;
+      transform: translateY(30px);
+      animation: fadeInSlide 0.6s forwards;
     }
-    .sad-option {
-      padding: 15px 25px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
+    .sad-option, .sub-option {
+      padding: 20px 30px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 15px;
       cursor: pointer;
-      transition: transform 0.3s;
+      border: 2px solid rgba(168, 230, 207, 0.5);
+      transition: transform 0.3s, box-shadow 0.3s;
     }
-    .sad-option:hover {
+    .sad-option:hover, .sub-option:hover {
       transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(168, 230, 207, 0.7);
     }
     #image-gallery {
       display: none;
       flex-wrap: wrap;
-      gap: 15px;
+      gap: 20px;
       justify-content: center;
-      animation: fadeIn 0.5s forwards;
+      animation: fadeIn 0.6s forwards;
     }
     .gallery-image {
-      width: 200px;
-      height: 200px;
+      width: 250px;
+      height: 250px;
       background-size: cover;
       background-position: center;
-      border-radius: 10px;
+      border-radius: 15px;
+      border: 5px solid #fff;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
       opacity: 0;
-      animation: zoomIn 0.5s forwards;
+      animation: zoomIn 0.6s forwards;
     }
     #back-button {
       margin-top: 20px;
@@ -88,7 +94,21 @@
     #back-button.active {
       display: block;
     }
-    #petal-rain {
+    .back-btn {
+      background: linear-gradient(135deg, #ff6f61, #d3a4d6);
+      color: #fff;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.2rem;
+      padding: 10px 25px;
+      border-radius: 10px;
+      border: 2px solid #fff;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .back-btn:hover {
+      transform: scale(1.1);
+    }
+    #heart-float {
       position: fixed;
       top: 0;
       left: 0;
@@ -97,11 +117,17 @@
       pointer-events: none;
       z-index: 1;
     }
+    .floating-heart {
+      position: absolute;
+      font-size: 1.5rem;
+      color: #ff6f61;
+      animation: floatUp 8s linear infinite;
+    }
     @keyframes fadeOut {
-      to { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 0; transform: translateY(-30px); }
     }
     @keyframes fadeInSlide {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
     @keyframes fadeIn {
@@ -109,29 +135,33 @@
       to { opacity: 1; }
     }
     @keyframes zoomIn {
-      from { transform: scale(0); opacity: 0; }
+      from { transform: scale(0.8); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0.7; }
+      100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
     }
     @media (max-width: 768px) {
       .comfort-container { padding: 20px; }
-      .mood-buttons button { font-size: 2rem; padding: 10px 20px; }
-      .sad-option { padding: 10px 15px; }
+      .mood-buttons button { font-size: 2.5rem; padding: 15px 25px; }
+      .sad-option, .sub-option { padding: 15px 20px; }
       .gallery-image { width: 150px; height: 150px; }
+      .back-btn { font-size: 1rem; padding: 8px 20px; }
     }
   </style>
 </head>
 <body>
-  <div id="petal-rain"></div>
+  <div id="heart-float"></div>
   <div class="comfort-container">
-    <h1 class="name">Sonal’s Comfort Corner</h1>
+    <h1 class="name" style="font-family: 'Great Vibes', cursive;">Sonal’s Serenity Haven</h1>
     <div class="mood-buttons">
       <button id="sad-btn" onclick="setMood(1)">😢</button>
     </div>
     <div id="comfort-content"></div>
     <div id="image-gallery"></div>
-    <div id="back-button"><button class="main-btn" onclick="goBack()">Back</button></div>
+    <div id="back-button"></div>
   </div>
-  <canvas id="fireworks-canvas"></canvas>
   <script src="next_script.js"></script>
 </body>
 </html>
