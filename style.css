@@ -219,6 +219,26 @@ button:hover {
   z-index: 2;
 }
 
+/* Flying Butterfly */
+.flying-butterfly {
+  position: absolute;
+  font-size: 2rem;
+  animation: butterflyFloat 5s ease-in-out infinite, butterflyFlap 0.5s alternate infinite;
+  pointer-events: none;
+  z-index: 5;
+}
+
+@keyframes butterflyFloat {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10vh); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes butterflyFlap {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.1); }
+}
+
 /* Fireworks */
 #fireworks-canvas {
   position: fixed;
@@ -253,4 +273,5 @@ button:hover {
   .comet { width: 2px; height: 2px; }
   .constellation-star { width: 3px; height: 3px; }
   .falling-petal { font-size: 1rem; }
+  .flying-butterfly { font-size: 1.5rem; }
 }
