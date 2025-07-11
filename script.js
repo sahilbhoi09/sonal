@@ -175,9 +175,9 @@ window.addEventListener('resize', () => {
   canvas.height = window.innerHeight;
 });
 
-// New Feature 1: Click to Spawn Elements
+// New Feature 1: Click to Spawn Elements (only on non-button areas)
 document.addEventListener('click', (e) => {
-  if (e.target.tagName !== 'BUTTON') { // Prevent button clicks from triggering spawn
+  if (e.target.tagName !== 'BUTTON' && !e.target.closest('.container')) {
     const container = document.getElementById('stars-container');
     const rand = Math.random();
     if (rand < 0.7) { // 70% chance for flower
@@ -228,7 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
   `;
 });
 
-// New Feature 10: Interactive Fireworks
+// New Feature 10: Interactive Fireworks (only on non-button areas)
 let fireworkColor = 'white';
 
 function updateFireworkColor(color) {
@@ -236,7 +236,7 @@ function updateFireworkColor(color) {
 }
 
 function launchCustomFirework(e) {
-  if (e.target.tagName !== 'BUTTON') { // Prevent button clicks from triggering fireworks
+  if (e.target.tagName !== 'BUTTON' && !e.target.closest('.container')) {
     const x = e.clientX;
     const y = canvas.height;
     const colors = [fireworkColor];
@@ -303,7 +303,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function setBackground(theme) {
   const backgrounds = {
-    normal: 'linear-gradient(45deg, #ffe0ec, #ffd6e8, #ffccd7)',
+    normal: 'linear-gradient(45deg, #ff6f61, #d3a4d6, #a8e6cf)',
     nebula: 'linear-gradient(to bottom, #1a0033, #4b0062, #8a2be2)',
     galaxy: 'linear-gradient(to bottom, #0a0a2a, #1a1a3a, #2a2a4a)',
     aurora: 'linear-gradient(to bottom, #00b7eb, #ff69b4, #9b59b6)'
