@@ -81,14 +81,13 @@ function handleOption(option) {
     content.style.display = 'none';
     gallery.style.display = 'flex';
     backBtn.classList.add('active');
-    // Placeholder images - PLEASE REPLACE WITH YOUR 5-6 IMAGE URLs BELOW
     const images = [
-      'https://via.placeholder.com/250x250.png?text=Image1',
-      'https://via.placeholder.com/250x250.png?text=Image2',
-      'https://via.placeholder.com/250x250.png?text=Image3',
-      'https://via.placeholder.com/250x250.png?text=Image4',
-      'https://via.placeholder.com/250x250.png?text=Image5',
-      'https://via.placeholder.com/250x250.png?text=Image6'
+      'https://example.com/beauty1.jpg',
+      'https://example.com/beauty2.jpg',
+      'https://example.com/beauty3.jpg',
+      'https://example.com/beauty4.jpg',
+      'https://example.com/beauty5.jpg',
+      'https://example.com/beauty6.jpg'
     ];
     images.forEach((img, index) => {
       const div = document.createElement('div');
