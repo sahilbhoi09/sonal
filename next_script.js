@@ -1,49 +1,136 @@
 function goBack() {
+  const content = document.getElementById('comfort-content');
+  const gallery = document.getElementById('image-gallery');
+  const backBtn = document.getElementById('back-button');
+  content.innerHTML = '';
+  gallery.innerHTML = '';
+  gallery.style.display = 'none';
+  backBtn.classList.remove('active');
+  document.querySelectorAll('.mood-buttons button').forEach(btn => btn.style.display = 'inline-block');
+  document.getElementById('petal-rain').innerHTML = '';
+  createPetals();
   window.location.href = "index.html";
 }
 
-// Mood-based content
+// Set sad mood
 function setMood(mood) {
-  const content = document.getElementById('mood-content');
-  content.classList.remove('active');
-  setTimeout(() => {
-    let html = '';
-    if (mood === 1 || mood === 2) { // Very Sad or Sad
-      html = `
-        <div class="sad-options">
-          <div>Fav Song: Imagine - John Lennon</div>
-          <div>Fav Food: Warm Chocolate Cake</div>
-          <div>Fav Line: "This too shall pass."</div>
-          <div>Fav Memory: A quiet evening by the sea</div>
-          <div>Message: You're not alone, take your time.</div>
-        </div>
-      `;
-      if (mood === 2) html += '<div>Things will get better soon!</div>';
-    } else if (mood === 3) { // Neutral
-      html = `
-        <div class="game-options">
-          <a href="#" onclick="playGame('bubble-shooter')">Bubble Shooter</a>
-          <a href="#" onclick="playGame('memory-match')">Memory Match</a>
-          <a href="https://poki.com/en/g/subway-surfers" target="_blank">Subway Surfers</a>
-          <a href="https://poki.com/en/g/temple-run-2" target="_blank">Temple Run 2</a>
-        </div>
-      `;
-    } else if (mood === 4) { // Happy
-      html = '<div>Great to see you happy! Enjoy a little firework! <button onclick="startFirework()">Launch</button></div>';
-    } else if (mood === 5) { // Very Happy
-      html = '<div>Wow, so joyful! 🎉 <div class="confetti"></div><button onclick="startFirework()">Celebrate!</button></div>';
+  const moodButtons = document.querySelectorAll('.mood-buttons button');
+  moodButtons.forEach(btn => {
+    if (btn !== event.target) {
+      btn.style.animation = 'fadeOut 0.5s forwards';
+      setTimeout(() => btn.style.display = 'none', 500);
     }
-    content.innerHTML = html;
+  });
+  event.target.style.animation = 'none';
+
+  setTimeout(() => {
+    const content = document.getElementById('comfort-content');
     content.classList.add('active');
-  }, 100);
+    const options = [
+      'Wanna listen to song??',
+      'Missing someone',
+      'Wanted love?',
+      'Lets see some beauties',
+      'Confess your feeling?'
+    ];
+    let html = '<div class="sad-options">';
+    options.forEach((option, index) => {
+      html += `<div class="sad-option" onclick="handleOption(${index + 1})">${option}</div>`;
+    });
+    html += '</div>';
+    content.innerHTML = html;
+
+    const sadOptions = document.querySelectorAll('.sad-option');
+    sadOptions.forEach((option, index) => {
+      setTimeout(() => option.style.animation = 'fadeInSlide 0.5s forwards', index * 100);
+    });
+  }, 600);
 }
 
-// Built-in games (simple placeholders)
-function playGame(game) {
-  alert(`Playing ${game}! (This is a demo—implement your game logic here!)`);
+// Handle option clicks
+function handleOption(option) {
+  const content = document.getElementById('comfort-content');
+  content.innerHTML = '';
+  if (option === 1) { // Wanna listen to song??
+    const songs = [
+      'https://www.youtube.com/watch?v=XLlO1v6e2rQ', // Imagine - John Lennon
+      'https://www.youtube.com/watch?v=dQw4w9WgXcQ', // Placeholder (e.g., Never Gonna Give You Up)
+      'https://www.youtube.com/watch?v=YQHsXMglC9A'  // Someone Like You - Adele
+    ];
+    let html = '<div class="sad-options">';
+    songs.forEach(song => {
+      html += `<div class="comfort-option"><a href="${song}" target="_blank">Play Song</a></div>`;
+    });
+    html += `<div class="comfort-option"><a href="https://www.youtube.com/" target="_blank">Others</a></div>`;
+    html += '</div>';
+    content.innerHTML = html;
+  } else if (option === 2) { // Missing someone
+    let html = '<div class="sad-options">';
+    html += '<div class="sad-option" onclick="handleSubOption(2, \'S\')">S</div>';
+    html += '<div class="sad-option" onclick="handleSubOption(2, \'M\')">M</div>';
+    html += '</div>';
+    content.innerHTML = html;
+  } else if (option === 3) { // Wanted love?
+    content.innerHTML = '<div class="comfort-option">8435149722 and 9770126819, you find love here!!!</div>';
+  } else if (option === 4) { // Lets see some beauties
+    const gallery = document.getElementById('image-gallery');
+    const backBtn = document.getElementById('back-button');
+    content.style.display = 'none';
+    gallery.style.display = 'flex';
+    backBtn.classList.add('active');
+    const images = [
+      'https://via.placeholder.com/200x200.png?text=Beauty1',
+      'https://via.placeholder.com/200x200.png?text=Beauty2',
+      'https://via.placeholder.com/200x200.png?text=Beauty3',
+      'https://via.placeholder.com/200x200.png?text=Beauty4',
+      'https://via.placeholder.com/200x200.png?text=Beauty5',
+      'https://via.placeholder.com/200x200.png?text=Beauty6'
+    ];
+    images.forEach((img, index) => {
+      const div = document.createElement('div');
+      div.className = 'gallery-image';
+      div.style.backgroundImage = `url(${img})`;
+      gallery.appendChild(div);
+      setTimeout(() => div.style.animation = 'zoomIn 0.5s forwards', index * 100);
+    });
+  } else if (option === 5) { // Confess your feeling?
+    content.innerHTML = '<div class="comfort-option"><textarea placeholder="Write your feelings here..." rows="4" cols="30"></textarea><button onclick="submitConfession()">Submit</button></div>';
+  }
 }
 
-// Firework from bottom to top burst
+// Handle sub-options for Missing someone
+function handleSubOption(option, sub) {
+  const content = document.getElementById('comfort-content');
+  if (option === 2) {
+    if (sub === 'S') {
+      content.innerHTML = '<div class="comfort-option">Call Sahil</div>';
+    } else if (sub === 'M') {
+      content.innerHTML = '<div class="comfort-option">Remember you have your memories in your lock folder</div>';
+    }
+  }
+}
+
+// Submit confession (basic placeholder)
+function submitConfession() {
+  alert('Your feelings have been noted! Feel free to share with someone you trust.');
+}
+
+// Petal rain animation
+function createPetals() {
+  const petalRain = document.getElementById('petal-rain');
+  for (let i = 0; i < 20; i++) {
+    const petal = document.createElement('div');
+    petal.className = 'falling-petal';
+    petal.innerText = '🍃';
+    petal.style.left = Math.random() * 100 + 'vw';
+    petal.style.animationDuration = 5 + Math.random() * 5 + 's';
+    petalRain.appendChild(petal);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', createPetals);
+
+// Firework from bottom to top burst (optional, can be removed if not needed)
 const canvas = document.getElementById("fireworks-canvas");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
