@@ -226,12 +226,13 @@ button:hover {
   animation: butterflyFloat 5s ease-in-out infinite, butterflyFlap 0.5s alternate infinite;
   pointer-events: none;
   z-index: 5;
+  color: #ff69b4; /* Pink for visibility */
 }
 
 @keyframes butterflyFloat {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-10vh); }
-  100% { transform: translateY(0); }
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10vh) rotate(20deg); }
+  100% { transform: translateY(0) rotate(0deg); }
 }
 
 @keyframes butterflyFlap {
